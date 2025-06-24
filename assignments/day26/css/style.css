@@ -20,7 +20,7 @@ header {
 }
 
 .hero-block {
-  background-image: url("/images/hero-img.jpg");
+  background-image: url("../images/hero-img.jpg");
   background-size: cover;
   height: auto;
   position: relative;
