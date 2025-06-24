@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars Details</title>
+    <script src="./script.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 15px;
+      margin-bottom: 20px;
+      max-width: 400px;
+    }
+    .card h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+    .card p {
+      margin: 5px 0;
+    }
+    .features, .variants {
+      margin-left: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Car List</h1>
+  <div id="car-list"></div>
+
+  <script>
+    const carData = [
+      {
+        company: "Toyota",
+        name: "Corolla",
+        type: "Sedan",
+        engine: "Petrol",
+        features: ["Airbags", "ABS", "Sunroof"],
+        year: 2023,
+        price: "$22,000",
+        variants: [
+          { name: "Base", price: "$20,000" },
+          { name: "Premium", price: "$24,000" }
+        ]
+      },
+      {
+        company: "Tesla",
+        name: "Model 3",
+        type: "Sedan",
+        engine: "Electric",
+        features: ["Autopilot", "Touchscreen", "Fast Charging"],
+        year: 2024,
+        price: "$39,000",
+        variants: [
+          { name: "Standard", price: "$39,000" },
+          { name: "Long Range", price: "$49,000" }
+        ]
+      },
+      {
+        company: "Hyundai",
+        name: "Creta",
+        type: "SUV",
+        engine: "Diesel",
+        features: ["Cruise Control", "Sunroof", "LED Headlights"],
+        year: 2022,
+        price: "$18,000",
+        variants: [
+          { name: "E", price: "$17,000" },
+          { name: "SX", price: "$20,000" }
+        ]
+      }
+    ];
+
+    const container = document.getElementById("car-list");
+
+    carData.forEach(car => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      card.innerHTML = `
+        <h2>${car.company} ${car.name}</h2>
+        <p><strong>Type:</strong> ${car.type}</p>
+        <p><strong>Engine:</strong> ${car.engine}</p>
+        <p><strong>Manufactured Year:</strong> ${car.year}</p>
+        <p><strong>Price:</strong> ${car.price}</p>
+        <p><strong>Features:</strong></p>
+        <ul class="features">
+          ${car.features.map(feature => `<li>${feature}</li>`).join('')}
+        </ul>
+        <p><strong>Variants:</strong></p>
+        <ul class="variants">
+          ${car.variants.map(variant => `<li>${variant.name} - ${variant.price}</li>`).join('')}
+        </ul>
+      `;
+
+      container.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>

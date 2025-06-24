@@ -1,0 +1,15 @@
+body{
+    overflow-x: hidden;
+}
+.drawer{
+    opacity: 0;
+    transform: translateX(300px);
+    transition: all 0.2s linear;
+    &.show{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+button{
+    cursor: pointer;
+}

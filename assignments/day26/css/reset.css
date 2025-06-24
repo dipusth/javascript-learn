@@ -1,0 +1,21 @@
+:root {
+  --primary: #061447;
+  --primary-900: #0C4332;
+  --secondary: #ffffff;
+  --secondary-50: #F9EBEC;
+  --secondary-500: #C33241;
+   --gradient1: #1DAA7E;
+  --gradient2: #1A8463;
+  --white: #FAFAFA;
+  --black: #2B2B2B;
+  --text-nohemi: 'Nohemi', sans-serif;
+  --black-800: #565656;
+  --yellow: #ffd633;
+}
+
+.focus-none{
+   &:focus, &:focus-within, &:focus-visible{
+    outline: none;
+  }
+}
+

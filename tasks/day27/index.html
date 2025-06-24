@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="This is Abroad Shikshya" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fustat:wght@200..800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="./script.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              clifford: "#da373d",
+              primary: {
+                DEFAULT: "#0f32b1", // Default primary color
+              },
+              yellow: {
+                DEFAULT: "#ffd663", // Default yellow color
+              },
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body>
+    <h1>Ftech Api</h1>
+    <div class="pgination-list">
+      <span>Showing results for</span>
+      <div class="card-list flex justify-between gap-4 flex-wrap mt-4">
+        <div class="card border-2 p-2 rounded-lg">
+          <div class="border-2 border-gray-100 rounded-[20px] overflow mb-4">
+            <img src="./images/az.png" alt="" />
+          </div>
+          <div class="card-info">
+            <h4 class="font-bold">
+              Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops
+            </h4>
+            <small class="block text-gray-500">Men's clothing</small>
+            <span class="price-tag font-bold">$109.95</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
