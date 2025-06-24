@@ -4,3 +4,9 @@
         border-radius: 20px;
     }
 }
+
+.card-list{
+    .card{
+        width: 20%;
+    }
+}
