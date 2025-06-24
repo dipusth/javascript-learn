@@ -91,7 +91,6 @@ footer {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 160%;
-  border-radius: 32px;
   min-height: 500px;
   @media (max-width: 1023px) {
     background-image: none;
