@@ -19,6 +19,12 @@ body{
         position: relative;
         overflow: hidden;
         border-bottom: 10px solid #ff7c00;
+        transition: all 0.2s linear;
+        cursor: pointer;
+        top: 0;
+        &:hover{
+            top: -10px;
+        }
         &:after{
             content: "";
             position: absolute;
