@@ -123,11 +123,12 @@ const employeeJson = [
             <img src=${item.photo} alt=${item.name} />
           </div>
           <div class="card-info">
-            <div class="item-center py-3 mb-4">
+            <div class="text-center py-3 mb-4">
               <h3 class="font-bold text-3">${item.name}</h3>
+               <span class='font-normal text-slate-400'>${item.position}</span>
             </div>
             <h4 class="font-bold text-6">
-             <span class='font-normal'>Position: </span>${item.position}
+             <span class='font-normal'>Position: </span>${item.phone}
             </h4>
             <small class="block font-bold"><span class='font-normal'>Department: </span>${item.department}</small>
             <small class="font-bold"> <span class='font-normal'>Email: </span>${item.email}</small>
