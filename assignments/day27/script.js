@@ -127,10 +127,8 @@ const employeeJson = [
               <h3 class="font-bold text-3">${item.name}</h3>
                <span class='font-normal text-slate-400'>${item.position}</span>
             </div>
-            <h4 class="font-bold text-6">
-             <span class='font-normal'>Position: </span>${item.phone}
-            </h4>
             <small class="block font-bold"><span class='font-normal'>Department: </span>${item.department}</small>
+            <small class="block font-bold"><span class='font-normal'>Phone: </span>${item.phone}</small>
             <small class="font-bold"> <span class='font-normal'>Email: </span>${item.email}</small>
           </div>
 
