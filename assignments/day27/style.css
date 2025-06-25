@@ -35,6 +35,12 @@ body{
     }
 }
 
+.card-info{
+    .item-center{
+        border-bottom: 1px solid #ddd;
+    }
+}
+
 .text-1{
     font-size: 2rem;
 }
