@@ -1,9 +1,17 @@
 
 const apiUrl = 'https://fakestoreapi.com/products'
-fetch(apiUrl) // Fetch api
+
+
+
+
+fetch(apiUrl) // Example public API
 .then(response => response.json()) // Convert response to JSON
 .then(data => {
+    const apiUrlLength =  data.length;
+    console.log(data)
     const cardList = document.querySelector('.card-list')
+
+    
     const cardItem = data.map((item) => {
       return  `
         <div class="card flex flex-col p-5 rounded-lg justify-between">
