@@ -15,7 +15,7 @@ fetch(apiUrl) // Fetch api
               ${item.title}
             </h4>
             <small class="block text-gray-500">${item.category}</small>
-            <span class="price-tag font-bold">${item.price}</span>
+            <span class="price-tag font-bold">$${item.price}</span>
           </div>
 
       </div>`
