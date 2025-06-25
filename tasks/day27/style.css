@@ -8,13 +8,14 @@ body{
     img{
         border-radius: 20px;
         transform: scale(1);
-        transition: all 0.2s linear;
+        transition: transform 0.3s linear;
         max-height: 10rem;
     }
     &:hover{
         box-shadow: 0 15px 30px rgba(0,0,0,0.1);
         img {
-            transform: scale(1.1)
+            transform: scale(1.1) scaleX(-1)
+
         }
 
     }
