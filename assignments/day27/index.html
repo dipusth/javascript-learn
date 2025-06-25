@@ -40,198 +40,140 @@
     </script>
   </head>
   <body>
-    <div class="wrapper p-10">
-      <div class="flex gap-8 items-center">
-        <h1 class="text-1 text-primary">Fake Store</h1>
-        <span class="icon-circle icon-md">
-          <svg
-            stroke="currentColor"
-            fill="currentColor"
-            stroke-width="0"
-            viewBox="0 0 512 512"
-            class="theme-icon"
-            height="1em"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M256 160c-52.9 0-96 43.1-96 96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0-49.9-49.9-49.9-131.1 0-181 49.9-49.9 131.1-49.9 181 0 49.9 49.9 49.9 131.1 0 181z"
-            ></path>
-          </svg>
-        </span>
+    <div class="container mx-auto">
+      <div class="text-center py-5">
+        <h1>Employee data</h1>
       </div>
-      <div class="container mx-auto mt-8">
-        <div class="pgination-list">
-          <div
-            class="card-list flex xl:justify-between justify-center gap-10 flex-wrap mt-4"
-          >
-            <div
-              role="status"
-              class="max-w-sm p-4 border border-gray-200 rounded-sm shadow-sm animate-pulse md:p-6 dark:border-gray-700"
-            >
-              <div
-                class="flex items-center justify-center h-48 mb-4 bg-gray-300 rounded-sm dark:bg-gray-700"
-              >
-                <svg
-                  class="w-10 h-10 text-gray-200 dark:text-gray-600"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 16 20"
-                >
-                  <path
-                    d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM10.5 6a1.5 1.5 0 1 1 0 2.999A1.5 1.5 0 0 1 10.5 6Zm2.221 10.515a1 1 0 0 1-.858.485h-8a1 1 0 0 1-.9-1.43L5.6 10.039a.978.978 0 0 1 .936-.57 1 1 0 0 1 .9.632l1.181 2.981.541-1a.945.945 0 0 1 .883-.522 1 1 0 0 1 .879.529l1.832 3.438a1 1 0 0 1-.031.988Z"
-                  />
-                  <path
-                    d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"
-                  />
-                </svg>
-              </div>
-              <div
-                class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"
-              ></div>
-              <div
-                class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"
-              ></div>
-              <div
-                class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"
-              ></div>
-              <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-              <div class="flex items-center mt-4">
-                <svg
-                  class="w-10 h-10 me-3 text-gray-200 dark:text-gray-700"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"
-                  />
-                </svg>
-                <div>
-                  <div
-                    class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2"
-                  ></div>
-                  <div
-                    class="w-48 h-2 bg-gray-200 rounded-full dark:bg-gray-700"
-                  ></div>
-                </div>
-              </div>
-              <span class="sr-only">Loading...</span>
+
+      <div
+        class="card-list flex xl:justify-between justify-center gap-10 flex-wrap mt-4"
+      ></div>
+
+      <div class="table-list py-10">
+        <!-- <table class="w-full">
+             <thead>
+                    <tr>
+                        <th>core</th>
+                        <th>core</th>
+                        <th>core</th>
+                        <th>core</th>
+                    </tr>
+                </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>45</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                </tr>
+               
+            </tbody>
+        </table> -->
+      
+             <table class="w-full">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Photo</th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Department</th>
+                <th>Contact</th>
+            </tr>
+        </thead>
+        <tbody class="table-data">
+            <div class="text-center bg-gray-200 py-5 table-header">
+
+                <h2  class="font-bold">Employee Data list</h2>
             </div>
-            <div
-              role="status"
-              class="max-w-sm p-4 border border-gray-200 rounded-sm shadow-sm animate-pulse md:p-6 dark:border-gray-700"
-            >
-              <div
-                class="flex items-center justify-center h-48 mb-4 bg-gray-300 rounded-sm dark:bg-gray-700"
-              >
-                <svg
-                  class="w-10 h-10 text-gray-200 dark:text-gray-600"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 16 20"
-                >
-                  <path
-                    d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM10.5 6a1.5 1.5 0 1 1 0 2.999A1.5 1.5 0 0 1 10.5 6Zm2.221 10.515a1 1 0 0 1-.858.485h-8a1 1 0 0 1-.9-1.43L5.6 10.039a.978.978 0 0 1 .936-.57 1 1 0 0 1 .9.632l1.181 2.981.541-1a.945.945 0 0 1 .883-.522 1 1 0 0 1 .879.529l1.832 3.438a1 1 0 0 1-.031.988Z"
-                  />
-                  <path
-                    d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"
-                  />
-                </svg>
-              </div>
-              <div
-                class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"
-              ></div>
-              <div
-                class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"
-              ></div>
-              <div
-                class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"
-              ></div>
-              <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-              <div class="flex items-center mt-4">
-                <svg
-                  class="w-10 h-10 me-3 text-gray-200 dark:text-gray-700"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"
-                  />
-                </svg>
-                <div>
-                  <div
-                    class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2"
-                  ></div>
-                  <div
-                    class="w-48 h-2 bg-gray-200 rounded-full dark:bg-gray-700"
-                  ></div>
-                </div>
-              </div>
-              <span class="sr-only">Loading...</span>
-            </div>
-            <div
-              role="status"
-              class="max-w-sm p-4 border border-gray-200 rounded-sm shadow-sm animate-pulse md:p-6 dark:border-gray-700"
-            >
-              <div
-                class="flex items-center justify-center h-48 mb-4 bg-gray-300 rounded-sm dark:bg-gray-700"
-              >
-                <svg
-                  class="w-10 h-10 text-gray-200 dark:text-gray-600"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 16 20"
-                >
-                  <path
-                    d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM10.5 6a1.5 1.5 0 1 1 0 2.999A1.5 1.5 0 0 1 10.5 6Zm2.221 10.515a1 1 0 0 1-.858.485h-8a1 1 0 0 1-.9-1.43L5.6 10.039a.978.978 0 0 1 .936-.57 1 1 0 0 1 .9.632l1.181 2.981.541-1a.945.945 0 0 1 .883-.522 1 1 0 0 1 .879.529l1.832 3.438a1 1 0 0 1-.031.988Z"
-                  />
-                  <path
-                    d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"
-                  />
-                </svg>
-              </div>
-              <div
-                class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"
-              ></div>
-              <div
-                class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"
-              ></div>
-              <div
-                class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"
-              ></div>
-              <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-              <div class="flex items-center mt-4">
-                <svg
-                  class="w-10 h-10 me-3 text-gray-200 dark:text-gray-700"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"
-                  />
-                </svg>
-                <div>
-                  <div
-                    class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2"
-                  ></div>
-                  <div
-                    class="w-48 h-2 bg-gray-200 rounded-full dark:bg-gray-700"
-                  ></div>
-                </div>
-              </div>
-              <span class="sr-only">Loading...</span>
-            </div>
-          </div>
-        </div>
+            <tr>
+                <td>1</td>
+                <td><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Smith" class="employee-photo"></td>
+                <td>John Smith</td>
+                <td>Software Engineer</td>
+                <td>Engineering</td>
+                <td>john.smith@example.com</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Maria Garcia" class="employee-photo"></td>
+                <td>Maria Garcia</td>
+                <td>HR Manager</td>
+                <td>Human Resources</td>
+                <td>maria.g@example.com</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><img src="https://randomuser.me/api/portraits/men/22.jpg" alt="David Kim" class="employee-photo"></td>
+                <td>David Kim</td>
+                <td>Data Analyst</td>
+                <td>Analytics</td>
+                <td>david.k@example.com</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Lisa Wong" class="employee-photo"></td>
+                <td>Lisa Wong</td>
+                <td>Marketing Director</td>
+                <td>Marketing</td>
+                <td>lisa.w@example.com</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td><img src="https://randomuser.me/api/portraits/men/19.jpg" alt="James Wilson" class="employee-photo"></td>
+                <td>James Wilson</td>
+                <td>Sales Executive</td>
+                <td>Sales</td>
+                <td>james.w@example.com</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td><img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Emma Johnson" class="employee-photo"></td>
+                <td>Emma Johnson</td>
+                <td>UX Designer</td>
+                <td>Design</td>
+                <td>emma.j@example.com</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td><img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Michael Brown" class="employee-photo"></td>
+                <td>Michael Brown</td>
+                <td>IT Support</td>
+                <td>IT</td>
+                <td>michael.b@example.com</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td><img src="https://randomuser.me/api/portraits/women/25.jpg" alt="Sophia Martinez" class="employee-photo"></td>
+                <td>Sophia Martinez</td>
+                <td>Financial Analyst</td>
+                <td>Finance</td>
+                <td>sophia.m@example.com</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td><img src="https://randomuser.me/api/portraits/men/28.jpg" alt="Robert Taylor" class="employee-photo"></td>
+                <td>Robert Taylor</td>
+                <td>Product Manager</td>
+                <td>Product</td>
+                <td>robert.t@example.com</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td><img src="https://randomuser.me/api/portraits/women/50.jpg" alt="Olivia Davis" class="employee-photo"></td>
+                <td>Olivia Davis</td>
+                <td>Customer Support</td>
+                <td>Support</td>
+                <td>olivia.d@example.com</td>
+            </tr>
+        </tbody>
+        </table>
       </div>
     </div>
   </body>

@@ -6,14 +6,31 @@ body{
     background-color: white;
     img{
         height: 12.5rem;
-        border-radius: 20px;
+        border-radius: 50%;
+        border: 3px solid white;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     }
 }
 
 .card-list{
     .card{
-        min-width: 15rem;
-        max-width: 15rem;
+        min-width: 20rem;
+        max-width: 20rem;
+        position: relative;
+        overflow: hidden;
+        &:after{
+            content: "";
+            position: absolute;
+            height: 50%;
+            width: 100%;
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+            background-color: red;
+            z-index: 0;
+            left: 0;
+            top: 0;
+            background-color: #ff7c00;
+        }
     }
 }
 
@@ -47,4 +64,18 @@ body{
     background-color: black;
     padding: 10px;
     border-radius: 50%;
+}
+
+table{
+    text-align: left;
+    td,th{
+        border: 1px solid gray;
+        padding: 10px;
+    }
+
+}
+
+.table-header{
+    border-top-left-radius: .625rem;
+    border-top-right-radius: .625rem;
 }

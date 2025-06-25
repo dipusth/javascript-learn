@@ -10,7 +10,7 @@ const employeeJson = [
       "email": "john.smith@example.com",
       "phone": "555-0101",
       "hireDate": "2020-05-15",
-   "photo": "https://randomuser.me/api/portraits/men/32.jpg"
+      "photo": "https://example.com/photos/john-smith.jpg"
     },
     {
       "id": 2,
@@ -20,7 +20,7 @@ const employeeJson = [
       "email": "sarah.j@example.com",
       "phone": "555-0102",
       "hireDate": "2018-11-03",
-   "photo": "https://randomuser.me/api/portraits/women/44.jpg"
+      "photo": "https://example.com/photos/sarah-j.jpg"
     },
     {
       "id": 3,
@@ -30,7 +30,7 @@ const employeeJson = [
       "email": "michael.c@example.com",
       "phone": "555-0103",
       "hireDate": "2021-02-28",
-   "photo": "https://randomuser.me/api/portraits/men/22.jpg"
+      "photo": "https://example.com/photos/michael-c.jpg"
     },
     {
       "id": 4,
@@ -40,7 +40,7 @@ const employeeJson = [
       "email": "emily.w@example.com",
       "phone": "555-0104",
       "hireDate": "2019-07-22",
-   "photo": "https://randomuser.me/api/portraits/women/68.jpg"
+      "photo": "https://example.com/photos/emily-w.jpg"
     },
     {
       "id": 5,
@@ -50,7 +50,7 @@ const employeeJson = [
       "email": "david.b@example.com",
       "phone": "555-0105",
       "hireDate": "2022-01-10",
-   "photo": "https://randomuser.me/api/portraits/men/19.jpg"
+      "photo": "https://example.com/photos/david-b.jpg"
     },
     {
       "id": 6,
@@ -60,7 +60,7 @@ const employeeJson = [
       "email": "lisa.r@example.com",
       "phone": "555-0106",
       "hireDate": "2020-09-17",
-   "photo": "https://randomuser.me/api/portraits/women/33.jpg"
+      "photo": "https://example.com/photos/lisa-r.jpg"
     },
     {
       "id": 7,
@@ -70,7 +70,7 @@ const employeeJson = [
       "email": "robert.k@example.com",
       "phone": "555-0107",
       "hireDate": "2021-04-05",
-   "photo": "https://randomuser.me/api/portraits/men/75.jpg"
+      "photo": "https://example.com/photos/robert-k.jpg"
     },
     {
       "id": 8,
@@ -80,7 +80,7 @@ const employeeJson = [
       "email": "jessica.l@example.com",
       "phone": "555-0108",
       "hireDate": "2017-12-12",
-   "photo": "https://randomuser.me/api/portraits/women/25.jpg"
+      "photo": "https://example.com/photos/jessica-l.jpg"
     },
     {
       "id": 9,
@@ -90,7 +90,7 @@ const employeeJson = [
       "email": "thomas.g@example.com",
       "phone": "555-0109",
       "hireDate": "2022-03-30",
-   "photo": "https://randomuser.me/api/portraits/men/55.jpg"
+      "photo": "https://example.com/photos/thomas-g.jpg"
     },
     {
       "id": 10,
@@ -100,7 +100,7 @@ const employeeJson = [
       "email": "amanda.t@example.com",
       "phone": "555-0110",
       "hireDate": "2021-08-14",
-   "photo": "https://randomuser.me/api/portraits/women/12.jpg"
+      "photo": "https://example.com/photos/amanda-t.jpg"
     },
     {
       "id": 11,
@@ -110,44 +110,11 @@ const employeeJson = [
       "email": "james.w@example.com",
       "phone": "555-0111",
       "hireDate": "2018-06-25",
-   "photo": "https://randomuser.me/api/portraits/men/19.jpg"
+      "photo": "https://example.com/photos/james-w.jpg"
     }
   ]
 
-    const cardList = document.querySelector('.card-list')
-    const tableList = document.querySelector('.table-list')
-  const cardItem = employeeJson.map((item) => {
-      return  `
-        <div class="card flex flex-col p-5 rounded-lg justify-between">
-          <div class="w-full item-center p-5 border-gray-100 rounded-full overflow mb-4 z-10">
-            <img src=${item.photo} alt=${item.name} />
-          </div>
-          <div class="card-info">
-            <h4 class="font-bold text-6">
-             <span class='font-normal'>Position: </span>${item.position}
-            </h4>
-            <small class="block font-bold"><span class='font-normal'>Department: </span>${item.department}</small>
-            <small class="font-bold"> <span class='font-normal'>Email: </span>${item.email}</small>
-          </div>
 
-      </div>`
-    }).join('')
-
-      cardList.innerHTML = cardItem
-    console.log('cardHtml', cardHtml)
-
-
-     const tableItem = employeeJson.map((item, i) => {
-      return  `
-         <tr>
-                <td>${item.i}</td>
-                <td><img src=${item.photo} alt="John Smith" class="employee-photo"></td>
-                <td>J${item.name}</td>
-                <td>${item.position}</td>
-                <td>${item.department}</td>
-                <td>${item.email}</td>
-            </tr>`
-    }).join('')
-
-          tableList.innerHTML = tableItem
-    console.log('tableItem', tableItem)
+  employeeJson.map((item) => {
+    console.log(item)
+  })

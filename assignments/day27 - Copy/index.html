@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="text-center font-bold text-5xl pt-10">EMPLOYEE ID CARDS</div>
+    <div id="idcard" class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-10">
+        
+    </div>
+
+    <div class="text-center font-bold text-5xl pt-10">EMPLOYEE DATA</div>
+    <div id="table" class="p-6 pt-10">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+               
+                <th scope="col" class="px-6 py-3">
+                    Name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Position
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Staff Id
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Address
+                </th>
+                 <th scope="col" class="px-6 py-3">
+                    Phone
+                </th> 
+            </tr>
+        </thead>
+        <tbody id="body">
+           
+           
+        </tbody>
+    </table>
+
+</div>
+
+
+    <script>
+        let idData = [
+           
+            {
+                id: "SS-79-1235",
+                name: "Jeevan Thapa",
+                address: "Panga-2, Kirtipur",
+                phone: "9860082015",
+                image:
+                    "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                designation: "Co-Founder",
+            },
+            {
+                id: "SS-79-1236",
+                name: "Anil Joshi",
+                address: "Baganaha-3, Bardiya",
+                phone: "9860082016",
+                image:
+                    "https://images.unsplash.com/photo-1654110455429-cf322b40a906?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                designation: "Primary Teacher",
+            },
+            {
+                id: "SS-79-1237",
+                name: "Sandeep Tharu",
+                address: "Buspark-9, Nepalgunj",
+                phone: "9860082017",
+                image:
+                    "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=689&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                designation: "Managing Director",
+            },
+            {
+                id: "SS-79-1238",
+                name: "Betty Ray",
+                address: "Panga-10, Kirtipur",
+                phone: "9860082018",
+                image:
+                    "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                designation: "Marketing Head",
+            },
+            {
+                id: "SS-79-1239",
+                name: "Ram Bahadur",
+                address: "Lalitpur-4, Satdobato",
+                phone: "9860082019",
+                image: "https://randomuser.me/api/portraits/men/32.jpg",
+                designation: "Project Manager",
+            },
+            {
+                id: "SS-79-1240",
+                name: "Sita Kumari",
+                address: "Bhaktapur-1, Thimi",
+                phone: "9860082020",
+                image: "https://randomuser.me/api/portraits/women/65.jpg",
+                designation: "HR Officer",
+            },
+            {
+                id: "SS-79-1241",
+                name: "Prakash Shrestha",
+                address: "Kathmandu-1, Teku",
+                phone: "9860082021",
+                image: "https://randomuser.me/api/portraits/men/85.jpg",
+                designation: "Graphic Designer",
+            },
+            {
+                id: "SS-79-1242",
+                name: "Manisha Rai",
+                address: "Itahari-2, Sunsari",
+                phone: "9860082022",
+                image: "https://randomuser.me/api/portraits/women/44.jpg",
+                designation: "Software Engineer",
+            },
+            {
+                id: "SS-79-1243",
+                name: "Ganesh Sharma",
+                address: "Birgunj-5, Parsa",
+                phone: "9860082023",
+                image: "https://randomuser.me/api/portraits/men/45.jpg",
+                designation: "Accountant",
+            },
+            {
+                id: "SS-79-1244",
+                name: "Meena Tamang",
+                address: "Pokhara-7, Lakeside",
+                phone: "9860082024",
+                image: "https://randomuser.me/api/portraits/women/30.jpg",
+                designation: "Receptionist",
+            },
+            {
+                id: "SS-79-1245",
+                name: "Bikash Shahi",
+                address: "Nijgadh-5, Bara",
+                phone: "9860082025",
+                image: "https://randomuser.me/api/portraits/men/20.jpg",
+                designation: "Logistics Manager",
+            },
+            {
+                id: "SS-79-1246",
+                name: "Pramila Acharya",
+                address: "Dhangadhi-3, Kailali",
+                phone: "9860082026",
+                image: "https://randomuser.me/api/portraits/women/23.jpg",
+                designation: "Sales Executive",
+            },
+            {
+                id: "SS-79-1247",
+                name: "Deepak Chaudhary",
+                address: "Lahan-4, Siraha",
+                phone: "9860082027",
+                image: "https://randomuser.me/api/portraits/men/12.jpg",
+                designation: "Field Officer",
+            },
+            {
+                id: "SS-79-1248",
+                name: "Rina Gurung",
+                address: "Malekhu-5, Dhading",
+                phone: "9860082028",
+                image: "https://randomuser.me/api/portraits/women/16.jpg",
+                designation: "Office Assistant",
+            },
+        ];
+        let cardContainer = document.getElementById("idcard");
+        let tableContainer =document.getElementById('body');
+
+        const mappedData = idData.map((ids) => {
+            return `
+            <div
+            class="h-[560px] w-[330px] bg-[url('https://i.pinimg.com/736x/1d/bc/9f/1dbc9fe5f976c36bcf945354458530bb.jpg')] bg-cover bg-center bg-no-repeat relative rounded border border-gray-200">
+            <img src="./Images/logo.svg" alt="" class="h-30 w-40 absolute -top-2 right-4" />
+
+            <img src="${ids.image}"
+                alt="" class="h-40 w-40 rounded-full border-[#aabb] shadow-xl border-5 absolute top-25 right-20" />
+                <img src="https://randomqr.com/assets/images/randomqr-256.png" alt="" class="h-15 w-15 -ml-4 absolute bottom-2 left-8">
+
+            <div class="flex flex-col absolute top-[50%] left-16 w-50">
+                <h2 class="text-center font-bold text-xl text-gray-700">
+                    ${ids.name}
+                </h2>
+                <p class="text-gray-500 font-bold text-sm text-center">
+                    ${ids.designation}
+                </p>
+            </div>
+            <div class="flex flex-col gap-2 absolute top-[63%] ml-8 text-gray-600 font-bold">
+                <p>Staff Id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ${ids.id}</p>
+                <p >Address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ${ids.address}</p>
+                <p>Phone&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ${ids.phone}</p>
+                <p>Valid Untill: 2023-12-30</p>
+
+                
+
+            </div>
+
+        </div>
+            `;
+        });
+        cardContainer.innerHTML+= mappedData.join('');
+
+
+        const tabledData = idData.map((emp)=>{
+            return`
+             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                    <img class="w-10 h-10 rounded-full" src="${emp.image}" alt="Jese image">
+                    <div class="ps-3">
+                        <div class="text-base font-semibold">${emp.name}</div>
+                    </div>  
+                </th>
+                <td class="px-6 py-4">
+                    ${emp.designation}
+                </td>
+                <td class="px-6 py-4">
+                     ${emp.id}
+                </td>
+                <td class="px-6 py-4">
+                    ${emp.address}
+                </td>
+                <td class="px-6 py-4">
+                    ${emp.phone}
+                </td>
+            </tr>
+            `;
+           
+        })
+         tableContainer.innerHTML+= tabledData.join('');
+    </script>
+</body>
+
+</html>
