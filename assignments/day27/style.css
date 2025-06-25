@@ -18,10 +18,11 @@ body{
         max-width: 20rem;
         position: relative;
         overflow: hidden;
+        border-bottom: 10px solid #ff7c00;
         &:after{
             content: "";
             position: absolute;
-            height: 50%;
+            height: 35%;
             width: 100%;
             border-bottom-left-radius: 25px;
             border-bottom-right-radius: 25px;
@@ -36,6 +37,9 @@ body{
 
 .text-1{
     font-size: 2rem;
+}
+.text-3{
+    font-size: 1.5625rem;
 }
 .text-6{
     font-size: 14px;

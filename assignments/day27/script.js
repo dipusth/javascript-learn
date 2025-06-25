@@ -119,10 +119,13 @@ const employeeJson = [
   const cardItem = employeeJson.map((item) => {
       return  `
         <div class="card flex flex-col p-5 rounded-lg justify-between">
-          <div class="w-full item-center p-5 border-gray-100 rounded-full overflow mb-4 z-10">
+          <div class="w-full item-center p-3 border-gray-100 rounded-full overflow mb-1 z-10">
             <img src=${item.photo} alt=${item.name} />
           </div>
           <div class="card-info">
+          <div class="item-center py-3">
+            <h3 class="font-bold text-3">${item.name}</h3>
+          </div>
             <h4 class="font-bold text-6">
              <span class='font-normal'>Position: </span>${item.position}
             </h4>
