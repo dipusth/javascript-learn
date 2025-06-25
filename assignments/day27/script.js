@@ -134,20 +134,18 @@ const employeeJson = [
     }).join('')
 
       cardList.innerHTML = cardItem
-    console.log('cardHtml', cardHtml)
 
 
-     const tableItem = employeeJson.map((item, i) => {
-      return  `
-         <tr>
-                <td>${item.i}</td>
-                <td><img src=${item.photo} alt="John Smith" class="employee-photo"></td>
-                <td>J${item.name}</td>
-                <td>${item.position}</td>
-                <td>${item.department}</td>
-                <td>${item.email}</td>
-            </tr>`
-    }).join('')
+const tableItem = employeeJson.map((item, i) => {
+  return `
+    <tr>
+      <td>${i + 1}</td>
+      <td><img src="${item.photo}" alt="${item.name}" class="employee-photo"></td> 
+      <td>${item.name}</td> 
+      <td>${item.position}</td>
+      <td>${item.department}</td>
+      <td><a href="mailto:${item.email}">${item.email}</a></td>
+    </tr>`;
+}).join('');
 
-          tableList.innerHTML = tableItem
-    console.log('tableItem', tableItem)
+tableList.innerHTML = tableItem;
