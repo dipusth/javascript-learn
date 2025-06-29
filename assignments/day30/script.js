@@ -1,6 +1,7 @@
 
 const apiUrl = 'https://fakestoreapi.com/products'
-fetch(apiUrl) // Fetch api
+const userApi = 'https://fakestoreapi.com/users'
+fetch(apiUrl) // Fetch products api
 .then(response => response.json()) // Convert response to JSON
 .then(data => {
     const cardList = document.querySelector('.card-list')
@@ -37,6 +38,29 @@ fetch(apiUrl) // Fetch api
       </div>`
     }).join('')
     cardList.innerHTML = cardItem
+})
+.catch(error => {
+console.error('Error fetching data:', error);
+});
+fetch(userApi) // Fetch users api
+.then(response => response.json()) // Convert response to JSON
+.then(data => {
+    const tableList = document.querySelector('.table-list')
+
+    const tableItem = data.map((item, i) => {
+      return `
+      <tr>
+      <td>${i} </td>
+      <td>${item.name.firstname} ${item.lastname} </td>
+      <td>${item.username}</td>
+      <td>${item.phone}</td>
+      
+      </tr>
+      
+      `
+    }).join('')
+    tableList.innerHTML += tableItem
+
 })
 .catch(error => {
 console.error('Error fetching data:', error);
