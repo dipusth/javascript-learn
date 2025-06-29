@@ -147,7 +147,30 @@ const tableItem = employeeJson.map((item, i) => {
       <td>${item.position}</td>
       <td>${item.department}</td>
       <td><a href="mailto:${item.email}">${item.email}</a></td>
+      <td>
+        <button class="btn border-2 border-gray-300 p-2 px-3 rounded-lg text-red-500 btn-delete" type="button"><i class="fa-solid fa-trash"></i></button>
+        <button class="ml-2 btn border-2 border-gray-300 p-2 px-3 rounded-lg text-red-500 btn-edit" type="button"><i class="fa-solid fa-pen-to-square"></i></button>
+      </td>
     </tr>`;
 }).join('');
 
 tableList.innerHTML = tableItem;
+
+
+const btnDelete = document.querySelectorAll('.btn-delete')
+const btnEdit = document.querySelectorAll('.btn-edit')
+
+
+btnDelete.forEach((del) => {
+  del.addEventListener('click', btnDeletefunction)
+
+})
+
+
+// btnEdit.addEventListener('click', btnEditfunction)
+function btnDeletefunction (data){
+  console.log('deleted', data)
+}
+function btnEditfunction (){
+  console.log('Edited')
+}
