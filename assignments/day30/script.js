@@ -46,12 +46,14 @@ fetch(userApi) // Fetch users api
 .then(response => response.json()) // Convert response to JSON
 .then(data => {
     const tableList = document.querySelector('.table-list')
-
+  console.log('data', data)
     const tableItem = data.map((item, i) => {
       return `
       <tr>
       <td>${i} </td>
-      <td>${item.name.firstname} ${item.lastname} </td>
+     
+      <td>${toTitleCase(item.name.firstname)} ${toTitleCase(item.name.lastname)}</td>
+      <td>${item.email}</td>
       <td>${item.username}</td>
       <td>${item.phone}</td>
       
@@ -66,6 +68,13 @@ fetch(userApi) // Fetch users api
 console.error('Error fetching data:', error);
 });
 
+
+function toTitleCase(str) {
+
+  return str.toLowerCase().split(' ').map(word =>
+    word.charAt(0).toUpperCase() + word.slice(1)
+  ).join(' ');
+}
 const iconLike = document.querySelector('.icon-like');
 document.addEventListener('click', function(e){
   console.log('e.target', e.target)
