@@ -55,6 +55,7 @@ fetch(userApi) // Fetch users api
       <td>${toTitleCase(item.name.firstname)} ${toTitleCase(item.name.lastname)}</td>
       <td>${item.email}</td>
       <td>${item.username}</td>
+      <td>${toTitleCase(item.address.city)}, ${toTitleCase(item.address.street)}, ${toTitleCase(item.address.zipcode)}</td>
       <td>${item.phone}</td>
       
       </tr>
