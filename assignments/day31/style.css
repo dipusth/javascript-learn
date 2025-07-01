@@ -108,7 +108,7 @@ table{
 .form-col-2{
     & > * {
         min-width: 47%;
-        max-width: 47%;
+
     }
 }
 

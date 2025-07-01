@@ -10,20 +10,19 @@ document.addEventListener("click", function (e) {
 
 // Fetch api function
 async function fetchApi(api) {
-  try{
-      const response =  await fetch(api)
-  
-    if (!response.ok){
-      throw new Error(`HTTP eror! status: ${response.status}`)
-    }
-    
-    let data =  response.json()
-    console.log('resp data', data)
-    return data
-  } catch (error){
-    console.error('Fetch Error:', error)
-  }
+  try {
+    const response = await fetch(api);
 
+    if (!response.ok) {
+      throw new Error(`HTTP eror! status: ${response.status}`);
+    }
+
+    let data = response.json();
+    // console.log('resp data', data)
+    return data;
+  } catch (error) {
+    console.error("Fetch Error:", error);
+  }
 }
 // Change to Ttile Case function
 function toTitleCase(str) {
@@ -38,12 +37,12 @@ const productApi = "https://fakestoreapi.com/products";
 // Fetch users api
 const userApi = "https://fakestoreapi.com/users";
 // Create Card List function
-async function cardListFunc (api){
-    const respData = await fetchApi(api);
-    const cardList = document.querySelector(".card-list");
-      const cardItem = respData
-      .map((item) => {
-        return `
+async function cardListFunc(api) {
+  const respData = await fetchApi(api);
+  const cardList = document.querySelector(".card-list");
+  const cardItem = respData
+    .map((item) => {
+      return `
         <div class="card flex flex-col p-5 rounded-lg justify-between">
           <div class="card-inner border-2 w-full item-center p-5 border-gray-100 rounded-[20px] overflow mb-4">
             <img src=${item.image} alt=${item.category} />
@@ -73,44 +72,46 @@ async function cardListFunc (api){
           </div>
 
       </div>`;
-      })
-      .join("");
-    cardList.innerHTML = cardItem;
-      return cardItem
-
+    })
+    .join("");
+  cardList.innerHTML = cardItem;
+  return cardItem;
 }
-cardListFunc(productApi)
+cardListFunc(productApi);
 // Create table list function
-async function tableListFunc(api){
+async function tableListFunc(api) {
   const tableList = document.querySelector(".table-list");
-  const resData = await fetchApi(api)
-  const tableListItem = resData.map((item, i) => {
-     return `
+  const resData = await fetchApi(api);
+  const tableListItem = resData
+    .map((item, i) => {
+      return `
       <tr>
         <td>${i + 1} </td>
       
         <td>${toTitleCase(item.name.firstname)} ${toTitleCase(
-            item.name.lastname
-          )}</td>
+        item.name.lastname
+      )}</td>
         <td>${item.email}</td>
         <td>${item.username}</td>
         <td>${toTitleCase(item.address.city)}, ${toTitleCase(
-            item.address.street
-          )}, ${toTitleCase(item.address.zipcode)}</td>
+        item.address.street
+      )}, ${toTitleCase(item.address.zipcode)}</td>
         <td>${item.phone}</td>
         <td>
-          <button class="btn border-2 border-gray-300 p-2 px-3 rounded-lg text-red-500 btn-delete" onClick="btnDeletefunction(${item, i})" type="button"><i class="fa-solid fa-trash"></i></button>
+          <button class="btn border-2 border-gray-300 p-2 px-3 rounded-lg text-red-500 btn-delete" onClick="btnDeletefunction(${
+            (item, i)
+          })" type="button"><i class="fa-solid fa-trash"></i></button>
           <button class="ml-2 btn border-2 border-gray-300 p-2 px-3 rounded-lg text-red-500 btn-edit" type="button"><i class="fa-solid fa-pen-to-square"></i></button>
         </td>
         
         </tr>
-    `
-    }).join('')
-   
-    tableList.innerHTML += tableListItem
-}
-tableListFunc(userApi)
+    `;
+    })
+    .join("");
 
+  tableList.innerHTML += tableListItem;
+}
+tableListFunc(userApi);
 
 // Action (Edit/Delete) Button Function
 // const btnDelete = document.querySelectorAll(".btn-delete");
@@ -130,33 +131,56 @@ function btnEditfunction() {
   console.log("Edited");
 }
 
-
 // form submit
-const formArea = document.querySelector('.form-area');
-
-formArea.addEventListener('submit', function(event) {
+const formArea = document.querySelector(".form-area");
+formArea.addEventListener("submit", function (event) {
   event.preventDefault();
 
   const form = event.target;
   const formData = new FormData(form);
+  console.log("formData", formData);
+  // const jsonObject = {};
 
-  fetch("https://fakestoreapi.com/products", {
-    method: "POST",
-    body: formData, 
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log("Success:", data);
-    alert("Form submitted successfully!");
-  })
-  .catch(error => {
-    console.error("Error submitting form:", error);
-    alert("Something went wrong!");
-  });
-});
+  // formData.forEach((value, key) => {
+  //   jsonObject[key] = value;
+  // });
 
+  // const jsonData = JSON.stringify(jsonObject);
+  // console.log('jsonData', jsonData)
 
+  const title = formData.get("title"); // input or textarea with name="title"
+  const price = formData.get("price"); // input with name="price"
+  const description = formData.get("description"); // textarea
+  const category = formData.get("category"); // textarea
+  const imageFile = formData.get("image"); // input type="file"
 
+  console.log("price", price);
+  console.log("imageFile", imageFile);
+
+  let payLoadData = 
+    {
+      id: 0,
+      title: title,
+      price: price,
+      description: description,
+      category: category,
+      image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+    }
   
 
-
+  const newJsonData = JSON.stringify(payLoadData);
+  console.log("newJsonData:", newJsonData);
+  fetch("https://fakestoreapi.com/products", {
+    method: "POST",
+    body: newJsonData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+      alert("Form submitted successfully!");
+    })
+    .catch((error) => {
+      console.error("Error submitting form:", error);
+      alert("Something went wrong!");
+    });
+});

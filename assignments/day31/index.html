@@ -76,31 +76,15 @@
           >
             <div class="sm:col-span-3">
               <label
-                for="first-name"
+                for="title"
                 class="block text-sm/6 font-medium text-gray-900"
-                >First name</label
+                >Title</label
               >
               <div class="mt-2">
                 <input
                   type="text"
-                  name="first-name"
-                  id="first-name"
-                  autocomplete="given-name"
-                  class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-              </div>
-            </div>
-            <div class="sm:col-span-3">
-              <label
-                for="last-name"
-                class="block text-sm/6 font-medium text-gray-900"
-                >Last name</label
-              >
-              <div class="mt-2">
-                <input
-                  type="text"
-                  name="last-name"
-                  id="last-name"
+                  name="title"
+                  id="title"
                   autocomplete="given-name"
                   class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
@@ -124,15 +108,14 @@
             </div>
             <div class="sm:col-span-3">
               <label
-                for="country"
+                for="category"
                 class="block text-sm/6 font-medium text-gray-900"
                 >Category</label
               >
               <div class="mt-2 grid grid-cols-1">
                 <select
-                  id="country"
-                  name="country"
-                  autocomplete="country-name"
+                  id="category"
+                  name="category"
                   class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 >
                   <option>Men's Clothing</option>
@@ -154,20 +137,7 @@
                 </svg>
               </div>
             </div>
-            <div class="sm:col-span-3">
-              <label
-                for="description"
-                class="block text-sm/6 font-medium text-gray-900"
-                >Description</label
-              >
-              <textarea
-                id="description"
-                rows="4"
-                class="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Description..."
-              ></textarea>
-            </div>
-            <div class="sm:col-span-3">
+             <div class="sm:col-span-3">
               <label
                 for="image"
                 class="block text-sm/6 font-medium text-gray-900"
@@ -180,6 +150,22 @@
                 class="w-full text-slate-500 font-medium text-sm bg-white border file:cursor-pointer cursor-pointer file:border-0 file:py-3 file:px-4 file:mr-4 file:bg-gray-100 file:hover:bg-gray-200 file:text-slate-500 rounded"
               />
             </div>
+            <div class="sm:col-span-3 w-full">
+              <label
+                for="description"
+                name="description"
+                class="block text-sm/6 font-medium text-gray-900"
+                >Description</label
+              >
+              <textarea
+                id="description"
+                name="description"
+                rows="4"
+                class="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Description..."
+              ></textarea>
+            </div>
+           
            <button type="submit" class="bg-gray-700 p-3 rounded-lg text-white">Submit</button>
           </form>
         </div>
