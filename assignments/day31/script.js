@@ -164,7 +164,7 @@ formArea.addEventListener("submit", function (event) {
       price: price,
       description: description,
       category: category,
-      image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+      image: imageFile,
     }
   
   const newJsonData = JSON.stringify(payLoadData);
