@@ -167,12 +167,15 @@ formArea.addEventListener("submit", function (event) {
       image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
     }
   
-
   const newJsonData = JSON.stringify(payLoadData);
   console.log("newJsonData:", newJsonData);
   fetch("https://fakestoreapi.com/products", {
     method: "POST",
     body: newJsonData,
+     headers: {
+      'Content-Type': 'application/json'
+    },
+
   })
     .then((response) => response.json())
     .then((data) => {
