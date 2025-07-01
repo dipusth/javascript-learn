@@ -166,7 +166,6 @@ btnDelete.forEach((del) => {
 
 })
 
-
 // btnEdit.addEventListener('click', btnEditfunction)
 function btnDeletefunction (data){
   console.log('deleted', data)

@@ -1,0 +1,137 @@
+body{
+    background-color: #f4f4f4;
+      font-family: "Inter", sans-serif;
+}
+.card{
+    background-color: white;
+    transition: all 0.1s linear;
+    position: relative;
+    top: 0;
+    img{
+        border-radius: 20px;
+        transform: scale(1);
+        transition: transform 0.8s linear;
+        max-height: 10rem;
+    }
+    &:hover{
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        img {
+            transform: scale(1.15)
+
+        }
+        top: -10px;
+
+    }
+}
+
+table{
+    width: 100%;
+    text-align: left;
+    td,th{
+        border: 1px solid gray;
+        padding: 10px;
+    }
+
+}
+.card-inner{
+    min-height: 14rem;
+    position: relative;
+    .icon-like{
+        top: 12px;
+        right: 12px;
+    }
+}
+.card-list{
+    .card{
+        min-width: 16rem;
+        max-width: 16rem;
+        cursor: pointer;
+    }
+}
+
+.text-1{
+    font-size: 2rem;
+}
+.text-6{
+    font-size: 14px;
+}
+.item-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    @media(min-width:1240px){
+        max-width: 1240px !important ;
+    }
+    padding: 0 15px;
+}
+
+.icon-md{
+    svg{
+        width: 2rem;
+        height: 2rem;
+        color: gold;
+    }
+}
+.icon-circle{
+    background-color: black;
+    padding: 5px;
+    border-radius: 50%;
+}
+.icon-like{
+    svg{
+        /* transition: all 0.3s linear; */
+       path{
+            stroke: white;
+            fill: white;
+        } 
+    } 
+    &.active{
+          svg {
+                    animation: bounce 0.8s ease-in-out;
+            path{
+        stroke: #3A4895;
+        fill: #3A4895;
+
+            }
+    }
+    }
+}
+
+/* form */
+.form-container{
+    max-width: 850px;
+    margin: 0 auto;
+}
+.form-col-2{
+    & > * {
+        min-width: 47%;
+        max-width: 47%;
+    }
+}
+
+@keyframes bounce {
+    0%{
+        transform: scale(1)
+    }
+    30%{
+        transform: scale(0.4)
+    }
+    50%{
+        transform: scale(0.7)
+    }
+    70%{
+        transform: scale(0.5)
+    }
+    80%{
+        transform: scale(0.8)
+    }
+    90%{
+        transform: scale(0.6)
+    }
+    100%{
+        transform: scale(1)
+    }
+}
