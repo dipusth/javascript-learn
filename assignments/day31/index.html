@@ -44,8 +44,8 @@
     </script>
   </head>
   <body>
-    <div class="wrapper p-10">
-      <div class="flex gap-8 items-center">
+    <div class="wrapper p-6 lg:p-10">
+      <div class="flex gap-8 items-center justify-center lg:justify-start">
         <h1 class="text-1 text-primary">Fake Store</h1>
         <span class="icon-circle icon-md">
           <svg
@@ -68,7 +68,9 @@
         <div class="text-center py-2">
           <h2 class="text-1 font-bold">Submit Form in Fake Store</h2>
         </div>
-        <div class="form-container rounded-xl p-12 mb-20  mt-5 bg-white box-shadow">
+        <div
+          class="form-container rounded-xl p-6 g:p-12 mb-20 mt-5 bg-white box-shadow"
+        >
           <form
             action=""
             class="flex justify-center lg:justify-between form-col-2 flex-wrap gap-8 form-area"
@@ -136,7 +138,7 @@
                 </svg>
               </div>
             </div>
-             <div class="sm:col-span-3">
+            <div class="sm:col-span-3">
               <label
                 for="image"
                 class="block text-sm/6 font-medium text-gray-900"
@@ -164,16 +166,16 @@
                 placeholder="Description..."
               ></textarea>
             </div>
-            <div class="submit-response">
-
-            </div>
-           <button type="submit" class="bg-primary p-3 rounded-lg text-white">Submit <i class="fa-solid fa-circle-notch spinner ml-3"></i></button>
+            <div class="submit-response"></div>
+            <button type="submit" class="bg-primary p-3 rounded-lg text-white">
+              Submit <i class="fa-solid fa-circle-notch spinner ml-3"></i>
+            </button>
           </form>
         </div>
         <div class="pgination-list mb-10">
           <div class="text-center py-2">
-          <h2 class="text-1 font-bold">Product List</h2>
-        </div>
+            <h2 class="text-1 font-bold">Product List</h2>
+          </div>
           <div
             class="card-list flex xl:justify-between justify-center gap-10 flex-wrap mt-4"
           >
@@ -344,8 +346,11 @@
             </div>
           </div>
         </div>
-        <div class="text-center pt-10">
-          <h1 class="text-1 text-primary">User List Table</h1>
+        <div class="text-center pt-10 table-responsive">
+          <div class="text-center py-3">
+
+            <h2 class="text-1 font-bold">User List Table</h2>
+          </div>
           <table class="table-list">
             <thead>
               <tr>
