@@ -114,14 +114,6 @@ async function tableListFunc(api) {
 tableListFunc(userApi);
 
 // Action (Edit/Delete) Button Function
-// const btnDelete = document.querySelectorAll(".btn-delete");
-// const btnEdit = document.querySelectorAll(".btn-edit");
-
-// btnDelete.forEach((del) => {
-//   del.addEventListener("click", btnDeletefunction);
-// });
-
-// btnEdit.addEventListener('click', btnEditfunction)
 function btnDeletefunction(item, index) {
   console.log("delet|ed item", item);
   console.log("delet|ed index", index);
@@ -133,54 +125,62 @@ function btnEditfunction() {
 
 // form submit
 const formArea = document.querySelector(".form-area");
+const formBtn = formArea.querySelector("button");
+const submitResponse = document.querySelector(".submit-response");
 formArea.addEventListener("submit", function (event) {
   event.preventDefault();
-
+  formBtn.classList.add("show");
   const form = event.target;
   const formData = new FormData(form);
-  console.log("formData", formData);
-  // const jsonObject = {};
-
-  // formData.forEach((value, key) => {
-  //   jsonObject[key] = value;
-  // });
-
-  // const jsonData = JSON.stringify(jsonObject);
-  // console.log('jsonData', jsonData)
-
-  const title = formData.get("title"); // input or textarea with name="title"
-  const price = formData.get("price"); // input with name="price"
-  const description = formData.get("description"); // textarea
-  const category = formData.get("category"); // textarea
-  const imageFile = formData.get("image"); // input type="file"
+  const title = formData.get("title");
+  const price = formData.get("price");
+  const description = formData.get("description");
+  const category = formData.get("category");
+  const imageFile = formData.get("image");
 
   console.log("price", price);
   console.log("imageFile", imageFile);
 
-  let payLoadData = 
-    {
-      id: 0,
-      title: title,
-      price: price,
-      description: description,
-      category: category,
-      image: imageFile,
-    }
-  
+  let payLoadData = {
+    id: 0,
+    title: title,
+    price: price,
+    description: description,
+    category: category,
+    image: imageFile,
+  };
+
   const newJsonData = JSON.stringify(payLoadData);
   console.log("newJsonData:", newJsonData);
+
   fetch("https://fakestoreapi.com/products", {
     method: "POST",
     body: newJsonData,
-     headers: {
-      'Content-Type': 'application/json'
+    headers: {
+      "Content-Type": "application/json",
     },
-
   })
-    .then((response) => response.json())
+    .then((response) => {
+      response.json();
+    })
     .then((data) => {
-      console.log("Success:", data);
-      alert("Form submitted successfully!");
+      console.log("data here", data);
+      if (formData) {
+        setTimeout(() => {
+          const para = document.createElement("p");
+          para.innerText = "Thanks for submitting message";
+          para.style.color = "green";
+          submitResponse.appendChild(para);
+          formBtn.classList.remove("show");
+          console.log("Success:", data);
+          //  alert("Form submitted successfully!");
+          setTimeout(() => {
+            para.remove();
+          }, 2000);
+
+          form.reset();
+        }, 1500);
+      }
     })
     .catch((error) => {
       console.error("Error submitting form:", error);
