@@ -70,6 +70,9 @@ table {
 .text-1 {
   font-size: 2rem;
 }
+.text-2 {
+  font-size: 1.5625rem;
+}
 .text-6 {
   font-size: 14px;
 }
@@ -122,18 +125,18 @@ table {
 
 /* form */
 .form-container {
-  max-width: 100%;
-  margin: 0 auto;
+width: 21.875rem;
+  /* margin: 0 auto;
     @media (min-width: 992px) {
       max-width: 850px;
-  }
+  } */
 }
 .form-col-2 {
   & > * {
     min-width: 100%;
-    @media (min-width: 992px) {
+    /* @media (min-width: 992px) {
       min-width: 47%;
-    }
+    } */
   }
 }
 .spinner {
