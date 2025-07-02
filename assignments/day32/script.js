@@ -109,6 +109,7 @@ async function tableListFunc(api, newData) {
   }
   let tableListItem = resData
     .map((item, i) => {
+      // console.log('item on delete function', item)
       return `
       <tr>
         <td>${i + 1} </td>
@@ -119,9 +120,7 @@ async function tableListFunc(api, newData) {
         <td>${item.description}</td>
         <td>${item.price}</td>
         <td>
-          <button class="btn border-2 border-gray-300 p-2 px-3 rounded-lg text-red-500 btn-delete" onClick="btnDeletefunction(${
-            (item, i)
-          })" type="button"><i class="fa-solid fa-trash"></i></button>
+          <button class="btn border-2 border-gray-300 p-2 px-3 rounded-lg text-red-500 btn-delete" onClick="btnDeletefunction(${i })" type="button"><i class="fa-solid fa-trash"></i></button>
           <button class="ml-2 btn border-2 border-gray-300 p-2 px-3 rounded-lg text-red-500 btn-edit" type="button"><i class="fa-solid fa-pen-to-square"></i></button>
         </td>
         
@@ -143,9 +142,9 @@ function toTitleCase(str) {
     .join(" ");
 }
 // Action (Edit/Delete) Button Function
-function btnDeletefunction(item, index) {
-  console.log("delet|ed item", item);
-  console.log("delet|ed index", index);
+function btnDeletefunction(index) {
+  // console.log("deleted item", index);
+  // console.log("delet|ed index");
   // data.splice(index, 1)
 }
 function btnEditfunction() {

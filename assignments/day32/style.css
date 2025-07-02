@@ -36,6 +36,11 @@ table {
   th{
     background-color: #ddd;
   }
+  td{
+    img{
+      width: 50%;
+    }
+  }
 }
 
 .table-responsive {
