@@ -118,7 +118,7 @@ async function tableListFunc(api, newData) {
         <td><img src=${item.image} alt=${item.category} /></td>
         <td>${item.category}</td>
         <td>${item.description}</td>
-        <td>${item.price}</td>
+        <td>$${item.price}</td>
         <td>
           <button class="btn border-2 border-gray-300 p-2 px-3 rounded-lg text-red-500 btn-delete" onClick="btnDeletefunction(${i })" type="button"><i class="fa-solid fa-trash"></i></button>
           <button class="ml-2 btn border-2 border-gray-300 p-2 px-3 rounded-lg text-red-500 btn-edit" type="button"><i class="fa-solid fa-pen-to-square"></i></button>
