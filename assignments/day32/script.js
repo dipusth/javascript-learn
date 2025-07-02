@@ -1,13 +1,3 @@
-// click on like button
-const iconLike = document.querySelector(".icon-like");
-document.addEventListener("click", function (e) {
-  console.log("e.target", e.target);
-  const icon = e.target.closest(".icon-like");
-  if (icon) {
-    icon.classList.add("active");
-  }
-});
-
 // Fetch products api
 const productApi = "https://fakestoreapi.com/products";
 // Fetch users api
@@ -110,10 +100,8 @@ formArea.addEventListener("submit", async function (event) {
 
 });
 
-
 // Create table list function
 async function tableListFunc(api, newData) {
-
   let resData = await fetchApi(api);
   if(newData) {
     resData = newData
