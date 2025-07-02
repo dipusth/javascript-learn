@@ -42,9 +42,11 @@ async function fetchApi(api, method = 'GET', data = null, headers = {}) {
 const formArea = document.querySelector(".form-area");
 const formBtn = formArea.querySelector("button");
 const submitResponse = document.querySelector(".submit-response");
-formArea.addEventListener("submit", function (event) {
+let tableList = document.querySelector(".table-list");
+
+
+formArea.addEventListener("submit", async function (event) {
   event.preventDefault();
-  
   const form = event.target;
   const formData = new FormData(form);
   const title = formData.get("title");
@@ -52,7 +54,9 @@ formArea.addEventListener("submit", function (event) {
   const description = formData.get("description");
   const category = formData.get("category");
   const imageFile = formData.get("image");
-
+  
+  const productListData =  await fetchApi(productApi);
+  console.log('productListData', productListData)
   let payLoadData = {
     id: 0,
     title: title,
@@ -71,12 +75,17 @@ formArea.addEventListener("submit", function (event) {
     return
   }
 
+  
   fetchApi(productApi, 'POST', payLoadData)
   .then((response) => {
     formBtn.classList.add("show");
+    return response
   })
   .then((data) => {
     console.log("data here", data);
+    let newData = [data, ...productListData]
+    console.log('newData', newData)
+    tableListFunc(productApi, newData);
     if (formData) {
       setTimeout(() => {
         const para = document.createElement("p");
@@ -101,66 +110,27 @@ formArea.addEventListener("submit", function (event) {
 
 });
 // Create Card List function
-async function cardListFunc(api) {
-  const respData = await fetchApi(api);
-  const cardList = document.querySelector(".card-list");
-  const cardItem = respData
-    .map((item) => {
-      return `
-        <div class="card flex flex-col p-5 rounded-lg justify-between">
-          <div class="card-inner border-2 w-full item-center p-5 border-gray-100 rounded-[20px] overflow mb-4">
-            <img src=${item.image} alt=${item.category} />
-            <span class="absolute icon icon-circle bg-slate-200 ml-auto icon-like">
-                <svg
-                  font-size="medium"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                >
-                  <path
-                    d="M11.2232 19.2905L11.2217 19.2892C8.62708 16.9364 6.55406 15.0515 5.11801 13.2946C3.69296 11.5512 3 10.0562 3 8.5C3 5.96348 4.97109 4 7.5 4C8.9377 4 10.3341 4.67446 11.2412 5.73128L12 6.61543L12.7588 5.73128C13.6659 4.67446 15.0623 4 16.5 4C19.0289 4 21 5.96348 21 8.5C21 10.0562 20.307 11.5512 18.882 13.2946C17.4459 15.0515 15.3729 16.9364 12.7783 19.2892L12.7768 19.2905L12 19.9977L11.2232 19.2905Z"
-                    stroke="#2C2F3A"
-                    stroke-width="2"
-                  ></path>
-                </svg>
-              </span>
-          </div>
-          <div class="card-info">
-            <h4 class="font-bold text-6">
-              ${item.title}
-            </h4>
-            <small class="block text-gray-500">${item.category}</small>
-            <span class="price-tag font-bold">$${item.price}</span>
-          </div>
 
-      </div>`;
-    })
-    .join("");
-  cardList.innerHTML = cardItem;
-  return cardItem;
-}
-cardListFunc(productApi);
+
 // Create table list function
-async function tableListFunc(api) {
-  const tableList = document.querySelector(".table-list");
-  const resData = await fetchApi(api);
-  const tableListItem = resData
+async function tableListFunc(api, newData) {
+
+  let resData = await fetchApi(api);
+  if(newData) {
+    resData = newData
+    console.log('newData in table func',newData)
+  }
+  let tableListItem = resData
     .map((item, i) => {
       return `
       <tr>
         <td>${i + 1} </td>
       
-        <td>${toTitleCase(item.name.firstname)} ${toTitleCase(
-        item.name.lastname
-      )}</td>
-        <td>${item.email}</td>
-        <td>${item.username}</td>
-        <td>${toTitleCase(item.address.city)}, ${toTitleCase(
-        item.address.street
-      )}, ${toTitleCase(item.address.zipcode)}</td>
-        <td>${item.phone}</td>
+        <td>${toTitleCase(item.title)}</td>
+        <td><img src=${item.image} alt=${item.category} /></td>
+        <td>${item.category}</td>
+        <td>${item.description}</td>
+        <td>${item.price}</td>
         <td>
           <button class="btn border-2 border-gray-300 p-2 px-3 rounded-lg text-red-500 btn-delete" onClick="btnDeletefunction(${
             (item, i)
@@ -173,9 +143,9 @@ async function tableListFunc(api) {
     })
     .join("");
 
-  tableList.innerHTML += tableListItem;
+  tableList.innerHTML = tableListItem;
 }
-tableListFunc(userApi);
+tableListFunc(productApi);
 
 // Change to Ttile Case function
 function toTitleCase(str) {
