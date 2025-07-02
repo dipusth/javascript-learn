@@ -39,6 +39,18 @@ table {
   width: 100%;
   overflow-x: auto;
 }
+.table-products{
+  tbody{
+    tr{
+
+      td{
+        &:last-child{
+          width: 9.375rem;
+        }
+      }
+    }
+  }
+}
 .card-inner {
   min-height: 14rem;
   position: relative;

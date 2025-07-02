@@ -109,7 +109,6 @@ formArea.addEventListener("submit", async function (event) {
   });
 
 });
-// Create Card List function
 
 
 // Create table list function
