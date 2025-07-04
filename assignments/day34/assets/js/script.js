@@ -1,3 +1,51 @@
+function actionMenu(clickedAction) {
+    const dropdownOption = document.querySelectorAll('.dropdown-option')
+    dropdownOption.forEach((item) =>{
+      if(item !== clickedAction){
+        item.classList.remove('active')
+        console.log('clickedAction removed  active')
+      }
+    })
+    clickedAction.classList.toggle('active')
+    console.log('clickedAction added active', clickedAction)
+    console.log('dropdownOption', dropdownOption)
+ 
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+
+  // const dropdown = document.querySelector('.dropdown-option');
+  // const toggleBtn = document.getElementById('dropdownToggle');
+
+  document.addEventListener('click', function(e){
+    let dropdownOptions = document.querySelectorAll('.dropdown-option')
+
+    dropdownOptions.forEach((dropdown) => {
+
+
+      console.log('click coserEl', e.target)
+      const targetClass = e.target.closest('.dropdown-option');
+      const targetContains = dropdown.contains(e.target);
+       console.log('targetContains', targetContains)
+      // const targetIsActive = dropdown.hasClass('active');
+      if(!targetClass || !targetContains ){
+        console.log('targetClass', targetClass)
+        console.log('target not clicked', dropdown)
+        dropdown.classList.remove('active') 
+      }
+    })
+    // if(dropdownOption && !dropdownOption.contains(e.target))
+    // {
+    //  dropdownOption.classList.remove('active') 
+    //  console.log('active removed')
+    // }
+    //  // ALSO close if clicked inside a list item
+    // if (dropdownOption && e.target.closest('.dropdown-option li')) {
+    //   dropdownOption.classList.remove('active');
+    // }
+  
+  })
+})
 // Fetch products api
 const productApi = "https://fakestoreapi.com/products";
 // Fetch users api
@@ -30,12 +78,12 @@ async function fetchApi(api, method = 'GET', data = null, headers = {}) {
 
 // form submit
 const formArea = document.querySelector(".form-area");
-const formBtn = formArea.querySelector("button");
+const formBtn = formArea ? formArea.querySelector("button") : null;
 const submitResponse = document.querySelector(".submit-response");
 let tableList = document.querySelector(".table-list");
 
 
-formArea.addEventListener("submit", async function (event) {
+formArea && formArea.addEventListener("submit", async function (event) {
   event.preventDefault();
   const form = event.target;
   const formData = new FormData(form);
@@ -68,7 +116,7 @@ formArea.addEventListener("submit", async function (event) {
   
   fetchApi(productApi, 'POST', payLoadData)
   .then((response) => {
-    formBtn.classList.add("show");
+    formBtn && formBtn.classList.add("show");
     return response
   })
   .then((data) => {
@@ -80,7 +128,7 @@ formArea.addEventListener("submit", async function (event) {
         para.innerText = "Your form has been submitted successfully";
         para.style.color = "green";
         submitResponse.appendChild(para);
-        formBtn.classList.remove("show");
+        formBtn && formBtn.classList.remove("show");
         tableListFunc(productApi, newData);
         console.log("Success:", data);
         //  alert("Form submitted successfully!");
@@ -116,12 +164,22 @@ async function tableListFunc(api, newData) {
         <td>${toTitleCase(item.title)}</td>
         <td><img src=${item.image} alt=${item.category} /></td>
         <td>${item.category}</td>
-        <td>${item.description}</td>
+        <td class='truncate max-w-[350px]'>${item.description}</td>
         <td>$${item.price}</td>
         <td>
-          <button class="btn border-2 border-gray-300 p-2 px-3 rounded-lg text-red-500 btn-delete" onClick="deleteProduct(${item.id })" type="button"><i class="fa-solid fa-trash"></i></button>
-          <button class="ml-2 btn border-2 border-gray-300 p-2 px-3 rounded-lg text-red-500 btn-edit" onClick="EditProduct(${item.id})" type="button"><i class="fa-solid fa-pen-to-square"></i></button>
-        </td>
+
+          <div class="relative">
+            <button class="dropdown-option" onClick='actionMenu(this)'>
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+              <ul class="dropdown-menu">
+                <li><a href="#" class="list">View</a></li>
+                <li><a href="#" class="list">Edit</a></li>
+                <li><a href="#" class="list delete" onClick='deleteProduct(${item.id})'>Remove</a></li>
+              </ul>
+          </div>
+
+       </td>
         
         </tr>
     `;
@@ -143,7 +201,7 @@ function toTitleCase(str) {
 // Action (Edit/Delete) Button Function
 async function deleteProduct(id) {
   const productApWithId = productApi+'/'+ id
-  console.log('productApWithId',productApWithId)
+  console.log('productApWithId',id)
   try{
     const fetchProductRes = await fetch(productApWithId, {
       method: 'DELETE',
