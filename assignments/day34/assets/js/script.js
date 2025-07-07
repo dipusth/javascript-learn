@@ -65,6 +65,7 @@ let tableList = document.querySelector(".table-list");
 let formSubmit = document.getElementById('productformSubmit')
 let formTitle = document.getElementById('title')
 let formSubmitText = formSubmit.querySelector('span')
+let formHeaderTitle = document.getElementById('head-title')
 let localDataRes = []
 
 const btnAddNew = document.querySelector('#btnAddNew')
@@ -75,6 +76,7 @@ btnAddNew.addEventListener('click', function(){
   addNewFormModal.classList.remove('hidden')
   formArea.reset()
   formSubmitText.innerText = 'Add New Product'
+  formHeaderTitle.innerText = 'Add New Product'
   setTimeout(() => {
     addNewFormModal.classList.add('delay')
   })
@@ -307,6 +309,7 @@ async function updateProduct(id, data) {
     }
     // console.log('result on updating form', result)
     formSubmitText.innerText = 'Update'
+    formHeaderTitle.innerText = 'Update Form'
     addNewFormModal.classList.remove('hidden')
     let title =  document.getElementsByName('title') 
     let price =  document.getElementsByName('price') 
