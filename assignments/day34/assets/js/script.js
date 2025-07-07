@@ -73,6 +73,7 @@ const formArea = document.querySelector(".form-area");
 btnAddNew.addEventListener('click', function(){
   addNewFormModal.classList.remove('hidden')
   formArea.reset()
+  formSubmitText.innerText = 'Add New Product'
   setTimeout(() => {
     addNewFormModal.classList.add('delay')
   })
