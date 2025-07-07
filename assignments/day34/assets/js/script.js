@@ -266,8 +266,8 @@ function openModal(id, item) {
         <div class="text-center pb-3">
           <h4 class="text-5 font-bold text-center" id="head-title">Are you sure want to Delete?</h4>
           <div class="flex justify-between gap-4 mt-6">
-            <button class="btn p-3 border-slate-400 border-2 border-solid text-slate-400" id="modal-cancel" onclick='removeData()'>Cancel</button>
-            <button class="btn p-3 bg-red-500 text-white" id="modal-remove" onclick='removeData(${id})'>Delete</button>
+            <button class="btn p-3 border-slate-400 border-2 border-solid text-slate-400" id="modal-cancel" onclick='removeData()'><i class="fa-solid fa-ban mr-2"></i>Cancel</button>
+            <button class="btn p-3 bg-red-500 text-white" id="modal-remove" onclick='removeData(${id})'><i class="fa-regular fa-trash-can mr-2"></i>Delete</button>
           </div>
         </div>
         <button
