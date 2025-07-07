@@ -264,10 +264,10 @@ function openModal(id, item) {
     let confirmModal = `
       <div class="bg-white p-10 rounded-lg shadow-lg w-[400px] relative border">
         <div class="text-center pb-3">
-          <h4 class="text-5 font-bold text-center" id="head-title">Are you sure want to Remove?</h4>
+          <h4 class="text-5 font-bold text-center" id="head-title">Are you sure want to Delete?</h4>
           <div class="flex justify-between gap-4 mt-6">
             <button class="btn p-3 border-slate-400 border-2 border-solid text-slate-400" id="modal-cancel" onclick='removeData()'>Cancel</button>
-            <button class="btn p-3 bg-red-500 text-white" id="modal-remove" onclick='removeData(${id})'>Remove</button>
+            <button class="btn p-3 bg-red-500 text-white" id="modal-remove" onclick='removeData(${id})'>Delete</button>
           </div>
         </div>
         <button
