@@ -1,3 +1,12 @@
+// click on like button
+const iconLike = document.querySelector(".icon-like");
+document.addEventListener("click", function (e) {
+  console.log("e.target", e.target);
+  const icon = e.target.closest(".icon-like");
+  if (icon) {
+    icon.classList.add("active");
+  }
+});
 document.addEventListener("DOMContentLoaded", function () {
   // const dropdown = document.querySelector('.dropdown-option');
   // const toggleBtn = document.getElementById('dropdownToggle');
@@ -209,7 +218,7 @@ function renderTable(productList) {
         <td>${toTitleCase(item.title)}</td>
         <td><img src=${item.image} alt=${item.category} /></td>
         <td>${item.category}</td>
-        <td class='truncate max-w-[350px]'>${item.description}</td>
+        <td class='truncate max-w-[350px] min-w-[300px]'>${item.description}</td>
         <td><b>$${item.price}</b></td>
         <td class='views icon-xs text-slate-400'><i class="fa-solid fa-eye mr-1"></i>${
           item.rating.count
