@@ -218,7 +218,7 @@ function renderTable(productList) {
         <td>${toTitleCase(item.title)}</td>
         <td><img src=${item.image} alt=${item.category} /></td>
         <td>${item.category}</td>
-        <td class='truncate max-w-[350px] min-w-[300px]'>${item.description}</td>
+        <td class='truncate max-w-[350px]'>${item.description}</td>
         <td><b>$${item.price}</b></td>
         <td class='views icon-xs text-slate-400'><i class="fa-solid fa-eye mr-1"></i>${
           item.rating.count
@@ -294,7 +294,7 @@ function openModal(id, item) {
   if (item) {
     console.log('item passed on openModal', item)
     let cardModal = `
-        <div class="card max-w-[300px] flex flex-col p-5 rounded-lg justify-between">
+        <div class="card max-w-[350px] min-w-[300px] flex flex-col p-5 rounded-lg justify-between">
           <div class="card-inner border-2 w-full item-center p-5 border-gray-300 rounded-[20px] overflow mb-4">
             <img src=${item.image} alt=${item.category} />
             <span class="absolute icon icon-circle circle-sm bg-slate-200 ml-auto icon-like">
