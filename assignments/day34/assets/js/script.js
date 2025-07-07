@@ -65,6 +65,7 @@ let tableList = document.querySelector(".table-list");
 let formSubmit = document.getElementById('productformSubmit')
 let formTitle = document.getElementById('title')
 let formSubmitText = formSubmit.querySelector('span')
+let localDataRes = []
 
 const btnAddNew = document.querySelector('#btnAddNew')
 const addNewFormModal = document.querySelector('#addNewFormModal')
@@ -161,7 +162,7 @@ const fetchProductRes = await fetchProduct.json();
 const updatedData = currentEditId
   ? fetchProductRes.map(p => p.id === responseData.id ? responseData : p)
   : [responseData, ...fetchProductRes];
-  let newData = [responseData, ...productListDataRes]
+  // let newData = [responseData, ...productListDataRes]
 
   setTimeout(() => {
     const para = document.createElement("p");
@@ -169,7 +170,7 @@ const updatedData = currentEditId
     para.style.color = "green";
     submitResponse.appendChild(para);
     formSubmit && formSubmit.classList.remove("show");
-    tableListFunc(productApi, newData);
+    tableListFunc(productApi, updatedData);
     setTimeout(() => {
       para.remove();
       addNewFormModal.classList.add('hidden')      
@@ -186,14 +187,18 @@ async function tableListFunc(api, newData) {
   if(!newData){
     let fetchProduct = await fetchApi(api);
     let fetchRroductRes = await fetchProduct.json()
-    // console.log('fetchRroductRes', fetchRroductRes)
+    console.log('fetchRroductRes', fetchRroductRes)
+    localDataRes = [...fetchRroductRes]
+    console.log('localDataRes inside ', localDataRes)
     renderTable(fetchRroductRes)
   } else {
     renderTable(newData)
   }
 }
 tableListFunc(productApi);
+
 function renderTable(productList) {
+  console.log('productList on render table', productList)
   const tableListItem = productList
     .map((item, i) => {
       return `
@@ -249,25 +254,29 @@ async function deleteProduct(id) {
     }
     // Re-fetch product list and update UI
     const updatedList = await fetchApi(productApi);
-    const updatedListRes = await updatedList.json()
-    tableListFunc(productApi, updatedList);
+    deleteLocalProduct(id)
+    // tableListFunc(productApi, updatedList);
     alert( `Product Deleted successfully`)
   } catch (err){
     console.error(err.message)
     alert(err.message)
   }
 }
+
+function deleteLocalProduct(id) {
+  // Remove item from the local list
+  localProductList = localDataRes.filter(product => product.id !== id);
+  // Re-render your table with updated data
+  tableListFunc(null, localProductList);
+}
 async function updateProduct(id, data) {
   currentEditId = id || (data && data.id) || null;
   const productApWithId = productApi+'/'+ id
-
   let result = data;
-
   if (!result && id) {
     const productRes = await fetchApi(`${productApi}/${id}`);
     result = await productRes.json();
   }
-
   if (!result) return;
   updatingForm(result);
   // try{
