@@ -278,7 +278,7 @@ function dialogModalFunc(id) {
                   <h4 class="text-5 font-bold text-center" id="head-title">Are you sure want to Remove?</h4>
                   <div class="flex justify-between gap-4 mt-6">
                     <button class="btn p-3 border-slate-400 border-2 border-solid text-slate-400" id="modal-cancel" onclick='removeData()'>Cancel</button>
-                    <button class="btn p-3 bg-red-500" id="modal-remove" onclick='removeData(${id})'>Remove</button>
+                    <button class="btn p-3 bg-red-500 text-white" id="modal-remove" onclick='removeData(${id})'>Remove</button>
                   </div>
                 </div>
                 <button
@@ -295,6 +295,16 @@ function dialogModalFunc(id) {
 wrapper.innerHTML = dialogModalCard
 console.log('wrapper',wrapper)
 document.body.appendChild(wrapper.firstElementChild)
+
+  let dialogModalBtn = document.getElementById('btnCloseModal')
+   let dialogModal = document.getElementById('dialogModal')
+  console.log('dialogModalBtn close', dialogModalBtn)
+  if(dialogModalBtn){
+    console.log('dialogModalBtn close', dialogModalBtn)
+    dialogModalBtn.addEventListener('click', function(){
+      dialogModal.remove()
+    })
+  }
 
 }
 // Delete list after clicking remove on dialog
@@ -315,6 +325,18 @@ function removeData(id){
   dialogModal.remove()
 
 }
+
+// document.addEventListener('DOMContentLoaded', function(){
+
+//   const dialogModalBtn = document.getElementById('btnCloseModal')
+//   console.log('dialogModalBtn close', dialogModalBtn)
+//   if(dialogModalBtn){
+//     console.log('dialogModalBtn close', dialogModalBtn)
+//     dialogModalBtn.addEventListener('click', function(){
+//       console.log('dialogModalBtn close', dialogModalBtn)
+//     })
+//   }
+// })
 async function updateProduct(id, data) {
   currentEditId = id || (data && data.id) || null;
   let result = data;
