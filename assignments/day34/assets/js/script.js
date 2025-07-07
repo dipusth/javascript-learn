@@ -1,16 +1,5 @@
-function actionMenu(clickedAction) {
-    const dropdownOption = document.querySelectorAll('.dropdown-option')
-    dropdownOption.forEach((item) =>{
-      if(item !== clickedAction){
-        item.classList.remove('active')
-        console.log('clickedAction removed  active')
-      }
-    })
-    clickedAction.classList.toggle('active')
-    console.log('clickedAction added active', clickedAction)
-    console.log('dropdownOption', dropdownOption)
- 
-}
+
+
 
 document.addEventListener('DOMContentLoaded', function(){
 
@@ -21,16 +10,10 @@ document.addEventListener('DOMContentLoaded', function(){
     let dropdownOptions = document.querySelectorAll('.dropdown-option')
 
     dropdownOptions.forEach((dropdown) => {
-
-
-      console.log('click coserEl', e.target)
       const targetClass = e.target.closest('.dropdown-option');
       const targetContains = dropdown.contains(e.target);
-       console.log('targetContains', targetContains)
       // const targetIsActive = dropdown.hasClass('active');
       if(!targetClass || !targetContains ){
-        console.log('targetClass', targetClass)
-        console.log('target not clicked', dropdown)
         dropdown.classList.remove('active') 
       }
     })
@@ -58,17 +41,16 @@ async function fetchApi(api, method = 'GET', data = null, headers = {}) {
       headers: {
         'Content-Type': 'application/json',
         ...headers
-      }
+      },
+      ...(data && method !== 'GET' ? { body: JSON.stringify(data) } : {})
     };
-    if(data && method !== 'GET'){
-      options.body = JSON.stringify(data);
-    }
-    const response = await fetch(api , options);
+     const response = await fetch(api, options);
     if (!response.ok) {
       throw new Error(`HTTP eror! status: ${response.status}`);
     }
-    const result = response.json();
-    return result;
+    // const result = await response.json();
+
+    return response;
   } catch (error) {
     console.error("Fetch Error:", error);
     throw error
@@ -77,32 +59,56 @@ async function fetchApi(api, method = 'GET', data = null, headers = {}) {
 
 
 // form submit
-const formArea = document.querySelector(".form-area");
-const formBtn = formArea ? formArea.querySelector("button") : null;
+
 const submitResponse = document.querySelector(".submit-response");
 let tableList = document.querySelector(".table-list");
+let formSubmit = document.getElementById('productformSubmit')
+let formTitle = document.getElementById('title')
+let formSubmitText = formSubmit.querySelector('span')
 
+const btnAddNew = document.querySelector('#btnAddNew')
+const addNewFormModal = document.querySelector('#addNewFormModal')
+const btnCloseNew = document.querySelector('#btnCloseNew')
+const formArea = document.querySelector(".form-area");
+btnAddNew.addEventListener('click', function(){
+  addNewFormModal.classList.remove('hidden')
+  formArea.reset()
+  setTimeout(() => {
+    addNewFormModal.classList.add('delay')
+  })
+})
+btnCloseNew.addEventListener('click', function(){
+  addNewFormModal.classList.remove('delay')
+    setTimeout(() => {
+    addNewFormModal.classList.add('hidden')
+  }, 60)
+})
 
+// Click Action Function
+function actionMenu(clickedAction) {
+    const dropdownOption = document.querySelectorAll('.dropdown-option')
+    dropdownOption.forEach((item) =>{
+      if(item !== clickedAction){
+        item.classList.remove('active')
+      }
+    })
+    clickedAction.classList.toggle('active')
+
+ 
+}
+let currentEditId = null; // track if we're editing an existing product
 formArea && formArea.addEventListener("submit", async function (event) {
   event.preventDefault();
   const form = event.target;
   const formData = new FormData(form);
   const title = formData.get("title");
   const price = formData.get("price");
-  const description = formData.get("description");
+  const description = formData.get("descriptions");
   const category = formData.get("category");
   const imageFile = formData.get("image");
-  
+  // console.log('title', title)
   const productListData =  await fetchApi(productApi);
-  console.log('productListData', productListData)
-  let payLoadData = {
-    id: 0,
-    title: title,
-    price: price,
-    description: description,
-    category: category,
-    image: 'https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg',
-  };
+  const productListDataRes = await productListData.json()
 
   if(!title || !price || !description || !category){
     alert("Please enter complete credentials")
@@ -112,51 +118,81 @@ formArea && formArea.addEventListener("submit", async function (event) {
     alert("Please enter valid price")
     return
   }
+  formSubmit && formSubmit.classList.add("show");
+  let payLoadData = {
+    id: 0,
+    title: title,
+    price: price,
+    description: description,
+    category: category,
+    image: 'https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg',
+  };
+  let responseData;
+  if(currentEditId){
+    const updateRes = await fetchApi(`${productApi}/${currentEditId}`, 'PUT', payLoadData)
+    if(updateRes.ok){
+      alert('Product updated successfully')
+    }
+      responseData = await updateRes.json()
+    currentEditId = null
+    // formSubmitText = "Add New Product";
+  }else{
+    const postRes = await fetchApi(productApi, 'POST', payLoadData)
+    responseData =  await postRes.json()
+    // if(postRes.ok){
+    //   alert('Product added successfully')
+    // }
+  }
+  // Add rating manually
+  if(!responseData.rating){
+    const rating = {
+      count: 24,
+      rate: 4.5,
+    };
+    responseData.rating = rating
+  }
+
+  // Re-fetch latest list or locally update
+const fetchProduct = await fetchApi(productApi);
+const fetchProductRes = await fetchProduct.json();
+const updatedData = currentEditId
+  ? fetchProductRes.map(p => p.id === responseData.id ? responseData : p)
+  : [responseData, ...fetchProductRes];
+  let newData = [responseData, ...productListDataRes]
+
+  setTimeout(() => {
+    const para = document.createElement("p");
+    para.innerText = "Your form has been submitted successfully";
+    para.style.color = "green";
+    submitResponse.appendChild(para);
+    formSubmit && formSubmit.classList.remove("show");
+    tableListFunc(productApi, newData);
+    setTimeout(() => {
+      para.remove();
+      addNewFormModal.classList.add('hidden')      
+    }, 2000);
+
+    form.reset();
+  }, 1500);
 
   
-  fetchApi(productApi, 'POST', payLoadData)
-  .then((response) => {
-    formBtn && formBtn.classList.add("show");
-    return response
-  })
-  .then((data) => {
-    console.log("data here", data);
-    let newData = [data, ...productListData]
-    if (newData) {
-      setTimeout(() => {
-        const para = document.createElement("p");
-        para.innerText = "Your form has been submitted successfully";
-        para.style.color = "green";
-        submitResponse.appendChild(para);
-        formBtn && formBtn.classList.remove("show");
-        tableListFunc(productApi, newData);
-        console.log("Success:", data);
-        //  alert("Form submitted successfully!");
-        setTimeout(() => {
-          para.remove();
-        }, 2000);
-
-        form.reset();
-      }, 1500);
-    }
-  })
-  .catch((error) => {
-    console.error("Error submitting form:", error);
-    alert("Something went wrong!");
-  });
-
 });
 
 // Create table list function
 async function tableListFunc(api, newData) {
-  let resData = await fetchApi(api);
-  if(newData) {
-    resData = newData
-    console.log('newData in table func',newData)
+  if(!newData){
+    let fetchProduct = await fetchApi(api);
+    let fetchRroductRes = await fetchProduct.json()
+    // console.log('fetchRroductRes', fetchRroductRes)
+    renderTable(fetchRroductRes)
+  } else {
+    renderTable(newData)
   }
-  let tableListItem = resData
+}
+tableListFunc(productApi);
+function renderTable(productList) {
+  const tableListItem = productList
     .map((item, i) => {
-      // console.log('item on delete function', item)
       return `
       <tr>
         <td>${i + 1} </td>
@@ -165,17 +201,17 @@ async function tableListFunc(api, newData) {
         <td><img src=${item.image} alt=${item.category} /></td>
         <td>${item.category}</td>
         <td class='truncate max-w-[350px]'>${item.description}</td>
-        <td>$${item.price}</td>
+        <td><b>$${item.price}</b></td>
+        <td class='views icon-xs text-slate-400'><i class="fa-solid fa-eye mr-1"></i>${item.rating.count} <div class='border rounded-md inline-block p-1 ml-1'>${item.rating.rate}<i class="fa-solid fa-star text-orange-500 ml-1"></i></div></td>
         <td>
-
           <div class="relative">
             <button class="dropdown-option" onClick='actionMenu(this)'>
               <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
               <ul class="dropdown-menu">
                 <li><a href="#" class="list">View</a></li>
-                <li><a href="#" class="list">Edit</a></li>
-                <li><a href="#" class="list delete" onClick='deleteProduct(${item.id})'>Remove</a></li>
+                <li><a href="#" class="list" onClick='updateProduct(null, ${JSON.stringify(item).replace(/'/g, "&apos;")})'>Edit</a></li>
+                <li><a href="#" class="list delete" onClick="deleteProduct(${item.id})">Remove</a></li>
               </ul>
           </div>
 
@@ -188,7 +224,6 @@ async function tableListFunc(api, newData) {
 
   tableList.innerHTML = tableListItem;
 }
-tableListFunc(productApi);
 
 // Change to Ttile Case function
 function toTitleCase(str) {
@@ -201,7 +236,6 @@ function toTitleCase(str) {
 // Action (Edit/Delete) Button Function
 async function deleteProduct(id) {
   const productApWithId = productApi+'/'+ id
-  console.log('productApWithId',id)
   try{
     const fetchProductRes = await fetch(productApWithId, {
       method: 'DELETE',
@@ -210,10 +244,9 @@ async function deleteProduct(id) {
     if (!fetchProductRes.ok) {
       throw new Error(`Failed to delete product with ID: ${id}`);
     }
-    console.log('fetchProductRes',fetchProductRes)
     // Re-fetch product list and update UI
     const updatedList = await fetchApi(productApi);
-    console.log('updatedList',updatedList)
+    const updatedListRes = await updatedList.json()
     tableListFunc(productApi, updatedList);
     alert( `Product Deleted successfully`)
   } catch (err){
@@ -221,28 +254,95 @@ async function deleteProduct(id) {
     alert(err.message)
   }
 }
-async function EditProduct(id) {
+async function updateProduct(id, data) {
+  currentEditId = id || (data && data.id) || null;
   const productApWithId = productApi+'/'+ id
-  console.log('productApWithId',productApWithId)
-  try{
-    const fetchProductRes = await fetch(productApWithId, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json'},
-    })
-    if (!fetchProductRes.ok) {
-      throw new Error(`Failed to edit product with ID: ${id}`);
-    }
-    console.log('fetchProductRes',fetchProductRes)
-    // Re-fetch product list and update UI05  
-    const updatedList = await fetchApi(productApi);
-    console.log('updatedList',updatedList)
-    tableListFunc(productApi, updatedList);
-    alert( `Product Deleted successfully`)
-  } catch (err){
-    console.error(err.message)
-    alert(err.message)
+
+  let result = data;
+
+  if (!result && id) {
+    const productRes = await fetchApi(`${productApi}/${id}`);
+    result = await productRes.json();
   }
+
+  if (!result) return;
+  updatingForm(result);
+  // try{
+  //   if(id){
+
+  //     let productRes = await fetch(productApWithId)
+  //     console.log('productRes on update', productRes)
+  //     if(!productRes.ok) throw new Error(`Failed to update list with ID: ${id}`)
+  //     let result = await productRes.json()
+  //     console.log('result on id', result)
+  //     updatingForm(result)
+  //   }
+  //   if(data){
+  //       let result = data
+  //      console.log('result on data', result)
+  //       updatingForm(result)
+  //   }
+
+ 
+  // } catch(err){
+  //   console.error(err)
+  //   alert(err)
+  // }
+
+  function updatingForm(result){
+    if(!result ){
+      return
+    }
+    // console.log('result on updating form', result)
+    formSubmitText.innerText = 'Update'
+    addNewFormModal.classList.remove('hidden')
+    let title =  document.getElementsByName('title') 
+    let price =  document.getElementsByName('price') 
+    let category =  document.getElementsByName('category')[0]
+    let description =  document.getElementsByName('descriptions') 
+
+    if(category){
+      Array.from(category.options).forEach(option => {
+        const selectedOption = option.text.toLowerCase() === result.category.toLowerCase()
+        if(selectedOption) {
+          option.selected = true
+          return;
+        }
+        else  console.log('selected false', option)
+      })
+    }
+  
+    title[0].value = result.title
+    price[0].value = result.price
+    description[0].value = result.description
+    category[0].value = result.category
+
+
+  }
+  // try{
+  //   const fetchProductRes = await fetch(productApWithId, {
+  //     method: 'PUT',
+  //     headers: { 'Content-Type': 'application/json'},
+  //   })
+  //   if (!fetchProductRes.ok) {
+  //     throw new Error(`Failed to edit product with ID: ${id}`);
+  //   }
+  //   console.log('fetchProductRes',fetchProductRes)
+  //   // Re-fetch product list and update UI05  
+  //   const updatedList = await fetchApi(productApi);
+  //   console.log('updatedList',updatedList)
+  //   tableListFunc(productApi, updatedList);
+  //   alert( `Product Edited successfully`)
+  // } catch (err){
+  //   console.error(err.message)
+  //   alert(err.message)
+  // }
 }
-function btnEditfunction() {
-  console.log("Edited");
-}
+
+//  function submitProduct(e) {
+//   e.preventDefault()
+
+//   console.log('submitted')
+  
+  
+// }

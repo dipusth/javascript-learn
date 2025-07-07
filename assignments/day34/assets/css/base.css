@@ -2,11 +2,17 @@ html {
   font-size: 16px; /* Prevents scaling */
 }
 body {
-  font-family: "Outfit", sans-serif;
-  font-size: 16px;
+  font-family: "Nunito", sans-serif;
+  font-size: 14px;
+    background-color: #f5f6fa;
   overflow-x: hidden;
+  color: #364A63;
+
 }
 
+h1,h2,h3,h4,h5{
+  color: #364A63 ;
+}
 .container {
   margin: 0 auto;
   padding: 0 0.9375rem;
@@ -48,27 +54,37 @@ table {
   width: 100%;
   text-align: left;
   color: var(--table);
+  .fa{
+    font-size: 12px;
+  }
   th{
     font-weight: 600;
   }
   td,
   th {
-    border-bottom: 1px solid #d7d7d7;
-    padding: 10px;
+    border-bottom: 1px solid var(--table-border);
+    padding: .625rem 1.25rem;
   }
 
   td {
     img {
-      height: 6.25rem;
-      margin: 0 auto;
+      height: 4.375rem
+      /* margin: 0 auto; */
     }
   }
 }
 
 .table-responsive {
+  color: var(--table);
   width: 100%;
   overflow-x: auto;
-  @media (min-width: 62rem) {
+  table{
+    border: 1px solid var(--table-border);
+    tbody{
+      background-color: white
+    }
+  }
+  @media (min-width: 74.9375rem) {
     overflow-x: visible;
   }
 }
@@ -173,6 +189,13 @@ table {
     padding: 10px 21px;
     min-width: 190px;
   }
+}
+
+.btn-close{
+  position: absolute;
+  top: 5px;
+  right: 0;
+  font-size: 1.25rem;
 }
 
 .btn-gradient {
@@ -287,6 +310,16 @@ table {
    display: block;
    /* top: -10px; */
 }
+.modal{
+  transition: all 0.2s linear;
+  padding-top: 0;
+}
+
+.delay{
+  opacity: 1;
+  padding-top: 1.25rem;
+
+}
 .icon-circle {
   background-color: #e8f1ff;
   width: 80px;
@@ -358,6 +391,10 @@ table {
   }
 }
 
+.icon-xs{
+  font-size: .75rem;
+}
+
 .icon-circle {
   background-color: black;
   padding: 5px;
@@ -425,3 +462,52 @@ table {
 .card-brown {
   background-color: #a88964;
 }
+
+/* Rating */
+.rating { 
+  border: none;
+  float: left;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label { 
+  color: #ddd; 
+ float: right; 
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+ /* <fieldset class="rating">
+    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+    <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+    <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+    <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+    <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+    <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+</fieldset> */
+
