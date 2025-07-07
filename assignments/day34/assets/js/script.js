@@ -186,14 +186,16 @@ const updatedData = currentEditId
 
 // Create table list function
 async function tableListFunc(api, newData) {
+  console.log('newData in tableList func', newData)
   if(!newData){
     let fetchProduct = await fetchApi(api);
     let fetchRroductRes = await fetchProduct.json()
     console.log('fetchRroductRes', fetchRroductRes)
     localDataRes = [...fetchRroductRes]
-    console.log('localDataRes inside ', localDataRes)
-    renderTable(fetchRroductRes)
+    console.log('localDataRes inside if !newData', fetchRroductRes)
+    renderTable(localDataRes)
   } else {
+    console.log('newData inside if data not fetched', newData)
     renderTable(newData)
   }
 }
@@ -221,7 +223,7 @@ function renderTable(productList) {
               <ul class="dropdown-menu">
                 <li><a href="#" class="list">View</a></li>
                 <li><a href="#" class="list" onClick='updateProduct(null, ${JSON.stringify(item).replace(/'/g, "&apos;")})'>Edit</a></li>
-                <li><a href="#" class="list delete" onClick="deleteProduct(${item.id})">Remove</a></li>
+                <li><a href="#" class="list delete" onClick="removeDialogueModal(${item.id})">Remove</a></li>
               </ul>
           </div>
 
@@ -243,8 +245,9 @@ function toTitleCase(str) {
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 }
+
 // Action (Edit/Delete) Button Function
-async function deleteProduct(id) {
+async function removeDialogueModal(id) {
   const productApWithId = productApi+'/'+ id
   try{
     const fetchProductRes = await fetch(productApWithId, {
@@ -254,26 +257,66 @@ async function deleteProduct(id) {
     if (!fetchProductRes.ok) {
       throw new Error(`Failed to delete product with ID: ${id}`);
     }
+      dialogModalFunc(id)
     // Re-fetch product list and update UI
-    const updatedList = await fetchApi(productApi);
-    deleteLocalProduct(id)
-    // tableListFunc(productApi, updatedList);
-    alert( `Product Deleted successfully`)
+    // const updatedList = await fetchApi(productApi);
   } catch (err){
     console.error(err.message)
     alert(err.message)
   }
 }
+// Dialogue box modal function
+function dialogModalFunc(id) {
+  const wrapper= document.createElement('div')
+  const dialogModalCard = `
+            <div
+              id="dialogModal"
+              class="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+            >
+              <div class="bg-white p-10 rounded-lg shadow-lg w-[400px] relative border">
+                <div class="text-center pb-3">
+                  <h4 class="text-5 font-bold text-center" id="head-title">Are you sure want to Remove?</h4>
+                  <div class="flex justify-between gap-4 mt-6">
+                    <button class="btn p-3 border-slate-400 border-2 border-solid text-slate-400" id="modal-cancel" onclick='removeData()'>Cancel</button>
+                    <button class="btn p-3 bg-red-500" id="modal-remove" onclick='removeData(${id})'>Remove</button>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  id="btnCloseModal"
+                  class="btn-close px-4 py-2 rounded"
+                  id="btn-productClose"
+                >
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+            </div>
+`
+wrapper.innerHTML = dialogModalCard
+console.log('wrapper',wrapper)
+document.body.appendChild(wrapper.firstElementChild)
 
-function deleteLocalProduct(id) {
+}
+// Delete list after clicking remove on dialog
+function removeData(id){
+  const dialogModal = document.getElementById('dialogModal')
+  if(!id){
+    console.log('canceled')
+    dialogModal.remove()
+    return
+  }
+  console.log('localDataRes on removeData', localDataRes)
   // Remove item from the local list
-  localProductList = localDataRes.filter(product => product.id !== id);
-  // Re-render your table with updated data
+  let localProductList = localDataRes.filter(product => product.id !== id);
+  console.log('localProductList after filter', localProductList)
+  // Re-render table with updated data
+  localDataRes = localProductList
   tableListFunc(null, localProductList);
+  dialogModal.remove()
+
 }
 async function updateProduct(id, data) {
   currentEditId = id || (data && data.id) || null;
-  const productApWithId = productApi+'/'+ id
   let result = data;
   if (!result && id) {
     const productRes = await fetchApi(`${productApi}/${id}`);
@@ -281,33 +324,11 @@ async function updateProduct(id, data) {
   }
   if (!result) return;
   updatingForm(result);
-  // try{
-  //   if(id){
-
-  //     let productRes = await fetch(productApWithId)
-  //     console.log('productRes on update', productRes)
-  //     if(!productRes.ok) throw new Error(`Failed to update list with ID: ${id}`)
-  //     let result = await productRes.json()
-  //     console.log('result on id', result)
-  //     updatingForm(result)
-  //   }
-  //   if(data){
-  //       let result = data
-  //      console.log('result on data', result)
-  //       updatingForm(result)
-  //   }
-
- 
-  // } catch(err){
-  //   console.error(err)
-  //   alert(err)
-  // }
-
+  // Method to Update form elemet
   function updatingForm(result){
     if(!result ){
       return
     }
-    // console.log('result on updating form', result)
     formSubmitText.innerText = 'Update'
     formHeaderTitle.innerText = 'Update Form'
     addNewFormModal.classList.remove('hidden')
@@ -334,30 +355,4 @@ async function updateProduct(id, data) {
 
 
   }
-  // try{
-  //   const fetchProductRes = await fetch(productApWithId, {
-  //     method: 'PUT',
-  //     headers: { 'Content-Type': 'application/json'},
-  //   })
-  //   if (!fetchProductRes.ok) {
-  //     throw new Error(`Failed to edit product with ID: ${id}`);
-  //   }
-  //   console.log('fetchProductRes',fetchProductRes)
-  //   // Re-fetch product list and update UI05  
-  //   const updatedList = await fetchApi(productApi);
-  //   console.log('updatedList',updatedList)
-  //   tableListFunc(productApi, updatedList);
-  //   alert( `Product Edited successfully`)
-  // } catch (err){
-  //   console.error(err.message)
-  //   alert(err.message)
-  // }
 }
-
-//  function submitProduct(e) {
-//   e.preventDefault()
-
-//   console.log('submitted')
-  
-  
-// }

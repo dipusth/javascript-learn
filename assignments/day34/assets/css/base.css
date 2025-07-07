@@ -187,7 +187,7 @@ table {
 
   @media (min-width: 768px) {
     padding: 10px 21px;
-    min-width: 190px;
+    /* min-width: 190px; */
   }
 }
 
