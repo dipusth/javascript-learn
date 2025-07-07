@@ -309,8 +309,11 @@ function openModal(id, item) {
             <h4 class="font-bold text-6">
               ${item.title}
             </h4>
-            <small class="block text-gray-500">${item.category}</small>
+            <div class='flex justify-between items-center my-2'>
             <span class="price-tag font-bold text-slate-800 text-lg">$${item.price}</span>
+            <small class="block text-gray-500">${item.category}</small>
+            </div>
+            <button class="bg-primary py-2 px-3 rounded-lg w-full"><i class="fa-solid fa-cart-shopping mr-3"></i>Add to Cart</button>
           </div>
           <button
             type="button"
