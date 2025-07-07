@@ -106,7 +106,6 @@ formArea && formArea.addEventListener("submit", async function (event) {
   const description = formData.get("descriptions");
   const category = formData.get("category");
   const imageFile = formData.get("image");
-  // console.log('title', title)
   const productListData =  await fetchApi(productApi);
   const productListDataRes = await productListData.json()
 
@@ -138,6 +137,9 @@ formArea && formArea.addEventListener("submit", async function (event) {
     // formSubmitText = "Add New Product";
   }else{
     const postRes = await fetchApi(productApi, 'POST', payLoadData)
+    if(postRes.ok){
+      alert('Product created successfully')
+    }
     responseData =  await postRes.json()
     // if(postRes.ok){
     //   alert('Product added successfully')
@@ -170,10 +172,10 @@ const updatedData = currentEditId
     setTimeout(() => {
       para.remove();
       addNewFormModal.classList.add('hidden')      
-    }, 2000);
+    }, 600);
 
     form.reset();
-  }, 1500);
+  }, 500);
 
   
 });
