@@ -222,7 +222,9 @@ function renderTable(productList) {
               <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
               <ul class="dropdown-menu">
-                <li><a href="#" class="list">View</a></li>
+                <li><a href="#" class="list" onClick='openModal(null, ${JSON.stringify(
+                  item
+                ).replace(/'/g, "&apos;")})'>View</a></li>
                 <li><a href="#" class="list" onClick='updateProduct(null, ${JSON.stringify(
                   item
                 ).replace(/'/g, "&apos;")})'>Edit</a></li>
@@ -252,33 +254,77 @@ function toTitleCase(str) {
 }
 
 // Dialogue box modal function
-function openModal(id) {
+function openModal(id, item) {
   const wrapper = document.createElement("div");
-  const dialogModalCard = `
-            <div
-              id="dialogModal"
-              class="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
-            >
-              <div class="bg-white p-10 rounded-lg shadow-lg w-[400px] relative border">
-                <div class="text-center pb-3">
-                  <h4 class="text-5 font-bold text-center" id="head-title">Are you sure want to Remove?</h4>
-                  <div class="flex justify-between gap-4 mt-6">
-                    <button class="btn p-3 border-slate-400 border-2 border-solid text-slate-400" id="modal-cancel" onclick='removeData()'>Cancel</button>
-                    <button class="btn p-3 bg-red-500 text-white" id="modal-remove" onclick='removeData(${id})'>Remove</button>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  id="btnCloseModal"
-                  class="btn-close px-4 py-2 rounded"
-                  id="btn-productClose"
+  let dialogueWrapper = `
+  <div id="dialogModal"class="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" >
+  `;
+  if (id) {
+    console.log('id passed on openModal', id)
+    let confirmModal = `
+      <div class="bg-white p-10 rounded-lg shadow-lg w-[400px] relative border">
+        <div class="text-center pb-3">
+          <h4 class="text-5 font-bold text-center" id="head-title">Are you sure want to Remove?</h4>
+          <div class="flex justify-between gap-4 mt-6">
+            <button class="btn p-3 border-slate-400 border-2 border-solid text-slate-400" id="modal-cancel" onclick='removeData()'>Cancel</button>
+            <button class="btn p-3 bg-red-500 text-white" id="modal-remove" onclick='removeData(${id})'>Remove</button>
+          </div>
+        </div>
+        <button
+          type="button"
+          id="btnCloseModal"
+          class="btn-close px-4 py-2 rounded"
+          id="btn-productClose"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    `;
+    dialogueWrapper += confirmModal;
+  }
+  if (item) {
+    console.log('item passed on openModal', item)
+    let cardModal = `
+        <div class="card max-w-[300px] flex flex-col p-5 rounded-lg justify-between">
+          <div class="card-inner border-2 w-full item-center p-5 border-gray-300 rounded-[20px] overflow mb-4">
+            <img src=${item.image} alt=${item.category} />
+            <span class="absolute icon icon-circle circle-sm bg-slate-200 ml-auto icon-like">
+                <svg
+                  font-size="medium"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
                 >
-                  <i class="fa-solid fa-xmark"></i>
-                </button>
-              </div>
-            </div>
-`;
-  wrapper.innerHTML = dialogModalCard;
+                  <path
+                    d="M11.2232 19.2905L11.2217 19.2892C8.62708 16.9364 6.55406 15.0515 5.11801 13.2946C3.69296 11.5512 3 10.0562 3 8.5C3 5.96348 4.97109 4 7.5 4C8.9377 4 10.3341 4.67446 11.2412 5.73128L12 6.61543L12.7588 5.73128C13.6659 4.67446 15.0623 4 16.5 4C19.0289 4 21 5.96348 21 8.5C21 10.0562 20.307 11.5512 18.882 13.2946C17.4459 15.0515 15.3729 16.9364 12.7783 19.2892L12.7768 19.2905L12 19.9977L11.2232 19.2905Z"
+                    stroke="#2C2F3A"
+                    stroke-width="2"
+                  ></path>
+                </svg>
+              </span>
+          </div>
+          <div class="card-info">
+            <h4 class="font-bold text-6">
+              ${item.title}
+            </h4>
+            <small class="block text-gray-500">${item.category}</small>
+            <span class="price-tag font-bold text-slate-800 text-lg">$${item.price}</span>
+          </div>
+          <button
+            type="button"
+            id="btnCloseModal"
+            class="btn-close px-4 py-2 rounded text-slate-500"
+            id="btn-productClose"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+      </div>`;
+    dialogueWrapper += cardModal;
+  }
+  dialogueWrapper += `</div>`;
+  wrapper.innerHTML = dialogueWrapper;
   console.log("wrapper", wrapper);
   document.body.appendChild(wrapper.firstElementChild);
 
@@ -286,7 +332,7 @@ function openModal(id) {
   let dialogModal = document.getElementById("dialogModal");
   console.log("dialogModalBtn close", dialogModalBtn);
   if (dialogModalBtn) {
-    console.log("dialogModalBtn close", dialogModalBtn);
+    console.log("if dialogModalBtn close", dialogModalBtn);
     dialogModalBtn.addEventListener("click", function () {
       dialogModal.remove();
     });
