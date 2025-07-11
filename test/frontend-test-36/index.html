@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./script.js"></script>
+  </head>
+  <body>
+    <h1>Frontend Interview Task</h1>
+
+    <!-- controlled vs uncontrolled input Task 10 -->
+    <h2 class="text-2">Controlled Input</h2>
+    <form id="inputForm" class="mb-40">
+      <input
+        type="text"
+        id="controlledInput"
+        placeholder="Controlled Input here..."
+      />
+      <input
+        type="text"
+        id="unControlledInput"
+        placeholder="UnControlled Input here..."
+      />
+      <button type="submit">Submit</button>
+    </form>
+
+    <!-- Fetch API and search domain with API response Task 12 -->
+    <h2 class="text-2">Fetch API and search domain with API responset</h2>
+    <div class="flex">
+      <input
+        type="text"
+        id="inputDomain"
+        placeholder="Enter Domain here...(eg. example.com)"
+      />
+      <button type="button" onclick="searchDomain()">Search</button>
+    </div>
+    <div id="search-result"></div>
+    <!-- Debounce function implementation Task 6 -->
+    <h2 class="text-2">Debounce function implementation</h2>
+    <div class="flex">
+      <input
+        type="text"
+        id="searchBox"
+        placeholder="earch for: momos, mango, fries... etc."
+      />
+    </div>
+    <div id="search-debounce"></div>
+
+    <script>
+      // Controlled vs UnControlled Input Task 10
+      // UnControlled Input
+      document
+        .getElementById("inputForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const inputValue = document.getElementById("unControlledInput").value;
+          alert("Uncontrolled input value: " + inputValue);
+        });
+
+      // Controlled Input
+      let controlledValue = "";
+      const controlledInput = document.getElementById("controlledInput");
+      controlledInput.addEventListener("input", function (e) {
+        controlledValue = e.target.value;
+        console.log("controlledValue", controlledValue);
+      });
+
+      document
+        .getElementById("inputForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          alert("Controlled input value: " + controlledValue);
+        });
+
+      // search domain
+      async function searchDomain() {
+        const domain = document.getElementById("inputDomain").value.trim();
+        const resultData = document.getElementById("search-result");
+        console.log("running domain", domain);
+        const apiKey = "nFNKMNHC5U92+yDedZePmw==2xRkS1h01t9owZS4";
+        const fetchApi = await fetch(
+          `https://api.api-ninjas.com/v1/domain?domain=${domain}`,
+          {
+            headers: {
+              "X-Api-Key": apiKey,
+            },
+          }
+        );
+        const response = await fetchApi;
+        const resData = await response.json();
+        console.log("resData", resData);
+        const result = `
+                <div>
+                    <div><b>Domain:</b> ${resData.domain}</div>
+                    <div><b>Availabilty:</b> ${resData.available}</div>
+                    <div><b>Creation Date:</b> ${resData.creation_date}</div>
+                    <div><b>Registrar:</b> ${resData.registrar}</div>
+                        
+                </div>
+            `;
+        resultData.innerHTML = result;
+      }
+
+      //debounce implementation
+        let searchBox = document.getElementById('searchBox')
+        let timeOut;
+        function debounce(fn, delay) {
+            return function(...args){
+                clearTimeout(timeOut)
+                timeOut = setTimeout(() => {
+                        fn(...args)
+                    }, delay)
+                }
+
+            
+        }
+        const searchFunc = function(e){
+            e.preventDefault();
+            console.log('search is', e.target.value)
+            const query = e.target.value
+
+            const apiKey = "nFNKMNHC5U92+yDedZePmw==2xRkS1h01t9owZS4";
+            fetch(`https://api.api-ninjas.com/v1/nutrition?query=${query}`,
+                {
+                    headers: {
+                    "X-Api-Key": apiKey,
+                    },
+                }
+            )
+            .then(res => res.json())
+            .then(data => {
+                console.log('data here', data)
+            })
+        }
+
+
+        searchBox.addEventListener('input', debounce(searchFunc, 1000))
+      
+    </script>
+  </body>
+</html>

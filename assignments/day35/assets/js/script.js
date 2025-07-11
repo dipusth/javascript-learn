@@ -295,7 +295,7 @@ function openModal(id, item) {
     console.log('item passed on openModal', item)
     let cardModal = `
         <div class="card max-w-[400px] min-w-[300px] flex flex-col p-5 rounded-lg justify-between">
-          <div class=ard-inner border-2 w-full item-center p-5 border-gray-300 rounded-[20px] overflow mb-4">
+          <div class="card-inner border-2 w-full item-center p-5 border-gray-300 rounded-[20px] overflow mb-4">
             <img src=${item.image} alt=${item.category} />
             <span class="absolute icon icon-circle circle-sm bg-slate-200 ml-auto icon-like">
                 <svg
@@ -418,24 +418,4 @@ async function updateProduct(id, data) {
     description[0].value = result.description;
     category[0].value = result.category;
   }
-}
-
-function 
-(status, text) {
-  return `
-  <div class="toast active">
-  
-  <div class="toast-content">
-    <i class="fas fa-solid fa-check check"></i>
-
-    <div class="message">
-      <span class="text text-1">${status}</span>
-      <span class="text text-2">${text}</span>
-    </div>
-  </div>
-  <i class="fa-solid fa-xmark close"></i>
-  <div class="progress active"></div>
-</div>
-  `
-  
 }
